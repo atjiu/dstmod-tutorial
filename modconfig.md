@@ -35,16 +35,16 @@ configuration_options = {{
 
 有了配置项，接下来在modmain.lua里获取，然后加以利用
 
-通过 `GLOBAL.GetModConfigData()` 方法来获取值
+通过 `GetModConfigData()` 方法来获取值
 
 ```lua
-local use_count = GLOBAL.GetModConfigData("use_count")
+local use_count = GetModConfigData("use_count")
 ```
 
 然后修改一下上一篇写的去掉触手尖刺使用次数的代码，即可实现让玩家随自己喜好来定义使用次数
 
 ```lua
-local use_count = GLOBAL.GetModConfigData("use_count")
+local use_count = GetModConfigData("use_count")
 
 AddPrefabPostInit("tentaclespike", function(inst)
     if inst.components.finiteuses then

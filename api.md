@@ -235,6 +235,8 @@ RPC(Remote Procedure Call) 三个单词首字母缩写，意思是：远程过�
 
 与之对应的发送方法是 SendModRPCToServer()
 
+**使用方法详见案例中的rpc用法**
+
 ## AddClientModRPCHandler(namespace, name, fn)
 
 自定义RPC，发送方法是 SendModRPCToClient()

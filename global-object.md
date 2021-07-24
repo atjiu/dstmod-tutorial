@@ -665,64 +665,115 @@ local env =
 - GetDefaultClanID()
 - GetDefaultClanOnly()
 - GetDefaultClanAdmins()
-- SetServerTags()
-- SetWorldGenData()
+- SetServerTags() 设置服务器标签
+- SetWorldGenData() 设置世界生成数据
 - GetDefaultServerIntention()
 - GetDefaultEncodeUserPath()
-- GetDefaultServerName()
-- GetDefaultServerPassword()
-- GetDefaultServerDescription()
-- GetDefaultServerLanguage()
-- StartServer()
+- GetDefaultServerName() 获取默认服务器名称
+- GetDefaultServerPassword() 获取默认服务器密码
+- GetDefaultServerDescription() 获取默认服务器描述
+- GetDefaultServerLanguage() 获取默认服务器语言
+- StartServer() 启动服务器
 - TryDefaultEncodeUserPath()
 - GetWorldSessionFileInClusterSlot()
 - GetWorldSessionFile()
 - GetItemsBranch()
 - GetSessionIdentifier()
-- GetCountryCode()
-- SendSlashCmdToServer()
-- GetIsMasterSimulation()
-- SetIsMatchStarting()
-- SetIsWorldResetting()
-- SetIsClientInWorld()
-- NotifyAuthenticationFailure()
+- GetCountryCode() 获取国家code
+- SendSlashCmdToServer() 发送 / 命令给服务器，应该是获取饥荒命令列表的
+- GetIsMasterSimulation() 获取是否是主模拟器
+- SetIsMatchStarting() 设置是否开始匹配
+- SetIsWorldResetting() 设置世界是否重置
+- SetIsClientInWorld() 设置在世界中是否是客户端
+- NotifyAuthenticationFailure() 通知授权失败
 - DeserializeAllLocalUserSessions()
 - IsNetIDPlatformValid()
-- ViewNetProfile()
-- GetIsHosting()
-- GetServerDescription()
-- SetCheckVersionOnQuery()
-- SearchServers()
+- ViewNetProfile() 显示网络信息
+- GetIsHosting() 获取是否是主机
+- GetServerDescription() 获取服务器描述
+- SetCheckVersionOnQuery() 在查询时设置版本号
+- SearchServers() 搜索服务器
 - GetServerListingReadDirty()
-- IsSearchingServers()
-- GetServerListings()
-- StopSearchingServers()
+- IsSearchingServers() 是否在搜索服务器
+- GetServerListings() 获取所有器列表
+- StopSearchingServers() 停止搜索服务器
 - GetServerListingFromActualIndex()
-- JoinServerResponse()
-- ReportListing()
-- GetChildProcessStatus()
-- GetChildProcessError()
-- StartCloudServerRequestProcess()
-- GetCloudServerRequestState()
-- CancelCloudServerRequest()
+- JoinServerResponse() 加入服务器响应
+- ReportListing() 报告列表
+- GetChildProcessStatus() 获取子进程状态
+- GetChildProcessError() 获取子进程异常
+- StartCloudServerRequestProcess() 开始云端服务器请求处理
+- GetCloudServerRequestState() 获取云端服务器请求状态
+- CancelCloudServerRequest() 取消云端服务器请求
 - SendLobbyCharacterRequestToServer()
-- LoadPermissionLists()
+- LoadPermissionLists() 加载权限列表，应该对应的是专服里的那个 adminlist.txt 文件
 - HasPendingConnection()
-- GetLanguageCode()
-- SetBlacklist()
-- GetBlacklist()
+- GetLanguageCode() 获取语言code
+- SetBlacklist() 设置黑名单
+- GetBlacklist() 获取黑名单
 - GetPartyTable()
 - LeaveParty()
 - GetPartyChatHistory()
 - JoinParty()
 - PartyChat()
-- GetFriendsList()
+- GetFriendsList() 获取好友列表
 - InviteToParty()
-- GetAveragePing()
-- SetPlayerMuted()
+- GetAveragePing() 获取平均ping值
+- SetPlayerMuted() 设置玩家静音
 - TruncateSnapshotsInClusterSlot()
 - ListSnapshotsInClusterSlot()
 - ListSnapshots()
-- GetLocalUserName()
-- GetServerEvent()
-- IsVoiceActive()
+- GetLocalUserName() 获取本地用户名
+- GetServerEvent() 获取服务端事件
+- IsVoiceActive() 是否开启声音
+
+## TheInput
+
+玩家输入（键盘，鼠标）对象
+
+**属性**
+
+- overridepos
+
+**方法**
+
+- ControllerAttached()
+- GetWorldPosition() 获取世界坐标
+- GetWorldEntityUnderMouse() 获取鼠标所指实体
+- IsKeyDown() 判断鼠标是否按下
+- GetScreenPosition() 获取屏幕坐标
+- IsDebugToggleEnabled() 是否开启了debug模式
+- AddKeyHandler(function(key, down) end) 添加键盘/鼠标事件
+- AddTextInputHandler(function(text) end) 添加输入文本事件
+- IsControlPressed() 控制键是否被按下，非ctrl,shift,alt,这方法里面可以传任意按键的keycode
+- GetControlIsMouseWheel() 判断鼠标滚轮是否在滚去
+- UpdateEntitiesUnderMouse() 更新鼠标所指实体
+- GetAllEntitiesUnderMouse() 获取鼠标所指所有实体
+- CacheController()
+- ClearCachedController()
+- UpdatePosition(x,y) 更新位置信息，参数只有两个
+- OnControl()
+- OnMouseButton() 鼠标按键事件回调
+- OnMouseMove() 鼠标移动事件回调
+- OnRawKey()
+- OnText()
+- OnGesture() 鼠标手势回调
+- OnControlMapped()
+- ControllerConnected()
+- EnableAllControllers()
+- DisableAllControllers()
+- OnUpdate()
+- AddControlHandler()
+- GetHUDEntityUnderMouse()
+- GetAnalogControlValue() 获取类似物体的数据
+- AddGeneralControlHandler() 添加常规控制事件处理
+- TryRecacheController()
+- EnableMouse()
+- AddMoveHandler() 添加鼠标事件处理
+- GetLocalizedControl()
+- GetControllerID()
+- PlatformUsesVirtualKeyboard()
+- IsPasteKey()
+- GetStringIsButtonImage()
+- GetInputDevices() 获取输入设备信息
+- AddControlMappingHandler()

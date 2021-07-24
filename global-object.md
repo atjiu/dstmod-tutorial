@@ -2,9 +2,45 @@
 
 但有些对象就必须要用`GLOBAL`来调用，分别都有哪些呢？这里来罗列一下
 
+> 是否需要GLOBAL来调用的在 mods.lua 里有定义，在env里声明的都是可以直接用的，不需要加GLOBAL，其它就需要加上GLOBAL才能访问了，env声明部分代码如下
+
+```lua
+local env =
+{
+    -- lua
+    pairs = pairs,
+    ipairs = ipairs,
+    print = print,
+    math = math,
+    table = table,
+    type = type,
+    string = string,
+    tostring = tostring,
+    require = require,
+    Class = Class,
+
+    -- runtime
+    TUNING=TUNING,
+
+    -- worldgen
+    LEVELCATEGORY = LEVELCATEGORY,
+    GROUND = GROUND,
+    LOCKS = LOCKS,
+    KEYS = KEYS,
+    LEVELTYPE = LEVELTYPE,
+
+    -- utility
+    GLOBAL = _G,
+    modname = modname,
+    MODROOT = MODS_ROOT..modname.."/",
+}
+```
+
 被 `global()` 包装的对象经过查找在 `main.lua` 里，分别有以下这些
 
 > 这些对象在饥荒源码里找不到在哪定义的，所以下面罗列的属性及方法都是全局搜索出来的
+
+**以下列出的属性和方法使用 属性：GLOBAL.TheCamera.distance 来调用，方法 GLOBAL.TheCamera:GetDownVec()**
 
 ## TheCamera
 
@@ -554,3 +590,139 @@
 - SaveCustomPreset() 保存自定义预设
 - MoveCustomPreset() 移动自定义预设
 - DeleteCustomPreset() 删除自定义预设
+
+## TheNet
+
+网络对象
+
+**属性**
+
+没找到相关的属性
+
+**方法**
+
+- GetPVPEnabled() 获取pvp开启状态
+- Say() 群发
+- Talker() 私聊
+- Kick() 踢人
+- BanForTime() 禁人一段时间
+- Ban() 禁人
+- StartVote() 开始投票
+- StopVote() 停止投票
+- DiceRoll() 掷骰子
+- AnnounceVoteResult() 匿名投票结果
+- SendWorldRollbackRequestToServer() 发送回滚请求给服务器
+- SendWorldResetRequestToServer() 发送重置世界请求给服务器
+- IsDedicated() 检测是否是专服
+- SystemMessage() 系统消息
+- Announce() 匿名消息
+- SendRemoteExecute() 发送远程指令
+- GetDefaultMaxPlayers() 获取默认最大玩家数
+- GetServerIsClientHosted() 获取服务端与客户端是否是一个机器
+- GetClientTable()
+- StartClient()
+- GetNetworkStatistics() 获取网络统计
+- IsOnlineMode() 是否是在线模式
+- GetUserID() 获取用户id
+- GetServerGameMode() 获取服务端游戏模式
+- SendResumeRequestToServer() 发送继续请求给服务器
+- GetIsServer() 判断是否是服务端
+- GetIsClient() 判断是否是客户端
+- IncrementSnapshot()
+- TruncateSnapshots()
+- DoneLoadingMap()
+- CleanupSessionCache() 清除会话缓存
+- IsDedicatedOfflineCluster() 是否是离线专服
+- IsNetOverlayEnabled()
+- JoinServerResponse() 加入服务器响应
+- Disconnect() 断开连接
+- SendSpawnRequestToServer() 发送重生请求给服务器
+- DeleteUserSession() 删除玩家会话
+- DeserializeUserSession() 反序列化玩家会话
+- NotifyLoadingState() 通知加载状态
+- GetDefaultVoteEnabled() 获取默认投票是否开启
+- GetServerModNames() 获取服务端名字
+- ServerModSetup() 服务端mod设置信息
+- ServerModCollectionSetup() 服务端mod合集设置信息
+- BeginServerModSetup() 开始服务端mod配置
+- DownloadServerMods() 下载服务端mod
+- SendRPCToServer()
+- SendRPCToClient()
+- SendRPCToShard()
+- CallRPC()
+- CallClientRPC()
+- CallShardRPC()
+- SendModRPCToServer()
+- SendModRPCToClient()
+- SendModRPCToShard()
+- GetClientTableForUser()
+- SerializeWorldSession() 序列化世界会话
+- ServerModsDownloadCompleted() 服务端mod下载完成
+- GetDefaultGameMode() 获取默认游戏模式
+- GetDefaultPvpSetting() 获取默认pvp设置
+- GetDefaultFriendsOnlyServer() 获取默认仅好友设置
+- GetDefaultLANOnlyServer() 获取默认本地模式
+- GetDefaultClanID()
+- GetDefaultClanOnly()
+- GetDefaultClanAdmins()
+- SetServerTags()
+- SetWorldGenData()
+- GetDefaultServerIntention()
+- GetDefaultEncodeUserPath()
+- GetDefaultServerName()
+- GetDefaultServerPassword()
+- GetDefaultServerDescription()
+- GetDefaultServerLanguage()
+- StartServer()
+- TryDefaultEncodeUserPath()
+- GetWorldSessionFileInClusterSlot()
+- GetWorldSessionFile()
+- GetItemsBranch()
+- GetSessionIdentifier()
+- GetCountryCode()
+- SendSlashCmdToServer()
+- GetIsMasterSimulation()
+- SetIsMatchStarting()
+- SetIsWorldResetting()
+- SetIsClientInWorld()
+- NotifyAuthenticationFailure()
+- DeserializeAllLocalUserSessions()
+- IsNetIDPlatformValid()
+- ViewNetProfile()
+- GetIsHosting()
+- GetServerDescription()
+- SetCheckVersionOnQuery()
+- SearchServers()
+- GetServerListingReadDirty()
+- IsSearchingServers()
+- GetServerListings()
+- StopSearchingServers()
+- GetServerListingFromActualIndex()
+- JoinServerResponse()
+- ReportListing()
+- GetChildProcessStatus()
+- GetChildProcessError()
+- StartCloudServerRequestProcess()
+- GetCloudServerRequestState()
+- CancelCloudServerRequest()
+- SendLobbyCharacterRequestToServer()
+- LoadPermissionLists()
+- HasPendingConnection()
+- GetLanguageCode()
+- SetBlacklist()
+- GetBlacklist()
+- GetPartyTable()
+- LeaveParty()
+- GetPartyChatHistory()
+- JoinParty()
+- PartyChat()
+- GetFriendsList()
+- InviteToParty()
+- GetAveragePing()
+- SetPlayerMuted()
+- TruncateSnapshotsInClusterSlot()
+- ListSnapshotsInClusterSlot()
+- ListSnapshots()
+- GetLocalUserName()
+- GetServerEvent()
+- IsVoiceActive()

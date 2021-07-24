@@ -11,6 +11,7 @@
   * [饥荒源码目录结构](/folder-struct)
   * [Mod中常用的API](/api)
   * [全局对象](/global-object)
+  * [按键KEYCODE](/keycode)
 
 - 高级
 

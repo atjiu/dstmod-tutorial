@@ -10,6 +10,7 @@
 
   * [饥荒源码目录结构](/folder-struct)
   * [Mod中常用的API](/api)
+  * [全局对象](/global-object)
 
 - 高级
 
@@ -27,3 +28,4 @@
 - 案例
 
   * [RPC用法](sample-rpc)
+  * [添加食谱](/foodrecipe)

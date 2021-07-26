@@ -163,6 +163,8 @@ fn参数就是brain的实例
 
 - names: 原料名，可以是多个，类型是table
 - tags: 对原料的分类，类型是table
+  - tag共有：fruit, monster, sweetener, veggie, meat, fish, egg, decoration, fat, dairy, inedible, seed, magic
+  - 这个tag可以理解为某样食材的xx度，比如大肉有1的肉度，小肉有0.5的肉度，这个参数被用在定义食谱上
 - cancook：判断是否可以入锅做菜
 - candry：判断原料是否可风干
 
@@ -184,7 +186,7 @@ fn参数就是brain的实例
     perishtime = TUNING.PERISH_SLOW,
     sanity = TUNING.SANITY_TINY,
     cooktime = 2,
-    floater = {"small", 0.05, 0.7},
+    floater = {"small", 0.05, 0.7}
 }
 ```
 

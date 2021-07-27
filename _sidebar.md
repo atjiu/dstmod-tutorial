@@ -16,6 +16,7 @@
 
 - 高级
 
+  * [Class](class)
   * [component](component)
   * [prefab](prefab)
   * [action](action)

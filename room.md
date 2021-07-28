@@ -275,18 +275,10 @@ _G.TheWorld.topology:
 -- 下面方法大致可以将地图某个节点给修改成月岛的地形（不是指换地皮，而是走在上面有月岛上的效果，比如周围有月灵，精神会反转）
 AddPrefabPostInit("world",function(inst)
 	inst:DoTaskInTime(0, function(inst)
-		for k,v in pairs(topology.nodes) do
-			local moom = GLOBAL.SpawnPrefab("moonbase")
-			moom.Transform:SetPosition(v.x,0,v.y)
-			moom.persists=false
-			--moom.components.writeable:SetText("节点id"..k)
-			for k1,v1 in pairs(v.poly) do
-				local moom2 = GLOBAL.SpawnPrefab("homesign")
-				moom2.Transform:SetPosition(v1[1],0,v1[2])
-				moom2.persists=false
-			end
+        local topology = GLOBAL.TheWorld.topology
+		for k,node in pairs(topology.nodes) do
+			table.insert(node.tags, "lunacyarea")
 		end
-
 	end)
 end)
 ```

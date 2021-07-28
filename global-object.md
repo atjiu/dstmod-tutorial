@@ -777,3 +777,67 @@ local env =
 - GetStringIsButtonImage()
 - GetInputDevices() 获取输入设备信息
 - AddControlMappingHandler()
+
+## WorldSim
+
+生成地图的对象
+
+**属性**
+
+没找到相关的属性
+
+**方法**
+
+- GetChildrenForSite()
+- ForceConnectivity()
+- RemoveLink()
+- GenerateVoronoiMap()
+- PointInSit()
+- ResetAll()
+- ReplaceSingleNonLandTiles()
+- WorldGen_InitializeNodePoints()
+- GetSitePolygon()
+- AddExternalLink()
+- ReserveTile()
+- SetTileNodeId()
+- ForceDisconectedCells()
+- GetPointsForSite()
+- GenerateSessionIdentifier()
+- AddLink()
+- DetectDisconnect()
+- SetRoadParameters()
+- GetWormholes()
+- LuaPrint()
+- DrawCellLine()
+- DrawGroundLine()
+- GetTile()
+- WorldGen_VoronoiPass()
+- SetTile()
+- SetSiteFlags()
+- AddEdgePoints()
+- GetPointsForMetaMaze()
+- ReserveSpace()
+- GetSiteCentroid()
+- GetWormholesExtra()
+- GetRoad()
+- GetVisualTileAtPosition()
+- GetSite()
+- SetImpassibleTileType()
+- ClearNodeLinks()
+- SetNodeType()
+- GetSiteArea()
+- GetRandomPointsForSite()
+- GenerateBlendedMap()
+- SeparateIslands()
+- WorldGen_AddNewPositions()
+- RunMaze()
+- GetEncodedMap()
+- WorldGen_Commit()
+- GetWorldSize()
+- AddChild()
+- CreateNodeIdTileMap()
+- DrawRoads()
+- ConvertToTileMap()
+- IsTileReserved()
+- SetWorldSize()
+- RunCA()

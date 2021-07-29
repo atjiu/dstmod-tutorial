@@ -19,7 +19,6 @@
   * [Class](class)
   * [component](component)
   * [prefab](prefab)
-  * [action](action)
   * [stategraph](stategraph)
   * [anim](anim)
   * [sound](sound)

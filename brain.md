@@ -330,7 +330,7 @@ function ButterflyBrain:OnStart()
             -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
             IfNode(function()
-                return not TheWorld.state.isnight -- 这里我把这个判断不是白天就回家的行为改成夜里才回家
+                return TheWorld.state.isnight -- 这里我把这个判断不是白天就回家的行为改成夜里才回家
             end, "IsNight",
                 DoAction(self.inst, GoHomeAction, "go home", true)),
 
@@ -365,3 +365,7 @@ end)
 ```
 
 进游戏查看一下，傍晚蝴蝶还在不？
+
+![](images/20210730155829.png)
+
+> **关于脑子的修改，官方也提供了api `AddBrainPostInit()` 所以并不推荐这种覆盖的方式来修改脑子**

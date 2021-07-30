@@ -121,6 +121,7 @@ function fn()
     local inst = CreateEntity() -- 创建实体
     inst.entity:AddTransform() -- 添加xyz形变对象
     inst.entity:AddAnimState() -- 添加动画状态
+    inst.entity:AddNetwork() -- 添加这一行才能让所有客户端都能看到这个实体
 
     MakeInventoryPhysics(inst)
 

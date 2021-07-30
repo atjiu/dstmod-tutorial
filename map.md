@@ -8,7 +8,7 @@
 
 饥荒工具包里提供了一个tiled软件，它就是用来做地图的，不过它的版本太低了，我在官网上又下载了新版本的
 
-tiled官网地址：https://mapeditor.org
+tiled官网地址：https://www.mapeditor.org
 
 它有三个平台的版本，选择自己需要的下载即可，安装
 

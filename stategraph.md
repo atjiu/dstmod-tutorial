@@ -1,6 +1,6 @@
 ## StateGraph
 
-stategraph 直译是 状态图 的意思，类比于游戏里的状态机
+stategraph 直译是 状态图 的意思，类比于游戏里的状态机（注意，它不是状态机）
 
 定义文件在 `stategraph.lua` 里
 

@@ -85,3 +85,14 @@ PrefabFiles = { "yc" }
 
 ![](images/20210730101744.gif)
 
+## 其它
+
+```lua
+inst.AnimState:SetBank("yc") -- 地上动画
+inst.AnimState:SetBuild("yc") -- 材质包，就是anim里的zip包
+inst.AnimState:PlayAnimation("idle", true) -- 默认播放哪个动画 第二个参数是true表示重复播放
+```
+
+这三个东西里填的东西分别对应的着spriter里的哪些名字呢？如下图
+
+![](images/20210730113726.png)

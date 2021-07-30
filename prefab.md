@@ -230,6 +230,16 @@ end
 return Prefab("pidan", fn, assets, prefabs)
 ```
 
+通过CreateEntity()方法生成的 inst 实例，在最开始会添加一些方法(来自龙飞教程 https://www.jianshu.com/p/261c62c26e99)
+
+- Transform：变换组件，控制Prefab的位置、方向、缩放等等
+- AnimState：动画组件，控制Prefab的材质(Build)，动画集合(Bank)和动画播放(Animation)
+- Phiysics：物理组件，控制Prefab的物理行为，比如速度，碰撞类型等等。
+- Light：光照组件，添加该组件可使得Prefab成为一个光源。
+- Network：网络组件，添加与否决定了一个Prefab在主机上生成时，是否会被客户端“看”到。
+- MapEntity：地图实体组件，使用该组件可以为Prefab在小地图上创建一个图标。
+- SoundEmitter：声音组件，控制Prefab的声音集合和播放
+
 创建例子中的几个方法 `MakeInventoryPhysics(inst)` `MakeInventoryFloatable(inst)` `MakeHauntableLaunch(inst)`
 
 这些函数是在 `standardcomponents.lua` 里定义的，**这些方法绝大部分都是设置物理性质的**

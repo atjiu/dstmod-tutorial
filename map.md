@@ -1,6 +1,6 @@
 ## 内置地皮
 
-感谢 **五年一班 学会改变** 提供的地皮与编号对应图
+感谢 **五年一班 老司机** 提供的地皮与编号对应图
 
 ![](images/20210730161041.jpg)
 
@@ -277,23 +277,93 @@ return {
 
 ## 动态地形
 
-//TODO
+写动态地形之前首先要弄明白 room, task, taskset, level是啥，关于这点可以去 [节点](https://tomoya92.github.io/dstmod-tutorial/#/room) 里了解
 
+它们之前的关系如下图
 
+![](images/20210731001020.png)
 
+taskset 就是把不同的task给集合到一起去，最后还是被添加进了level里
 
+taskset对应的有四个值
 
+- default 联机版生物群落
+- classic 经典生物群落
+- lavaarena_taskset 熔炉生物群落（猜测）
+- quagmire_taskset 暴食生物群落（猜测）
 
+其中 default, classic 对应的就是创建存档时选择的生物群落
 
+![](images/20210731001337.png)
 
+下面开始自定义一个地形
 
+首先定义一个room
 
+```lua
+AddRoom("CUS_MoonLand", { -- 名字随便取，不过不要跟游戏默认的重复了
+    colour = { -- 调试用的，不用管它
+        r = .5,
+        g = .8,
+        b = .5,
+        a = .50
+    },
+    value = GLOBAL.GROUND.METEOR, -- 地皮，我这选择的是月岛的地皮，可去 constants.lua 文件里查看 GROUND 对象
+    tags = {"ExitPiece"}, -- room的标签，用于触发一些事件的，比如月岛地形走上去反转理智
+    contents = { -- 这里定义的是地形上的资源分布
+        countprefabs = {},
+        distributepercent = .6,
+        distributeprefabs = { -- 分布的资源（都是预制体名）后面数字是占比，下面添加的都是月岛上的实体
+            moon_tree = 0.3, -- 月树
+            sapling_moon = 0.3,
+            carrat_planted = 0.2,
+            moon_tree_blossom_worldgen = 0.2,
+            ground_twigs = 0.1,
+            rock_avocado_bush = 0.1,
+            moonglass_rock = 0.05, -- 玻璃
+            moon_fissure = 0.2
+        }
+    }
+})
+```
 
+然后定义一个task
 
+```lua
+AddTask("CUS_MoonLand_TASK", { -- 名字随便取，也不要跟游戏默认的重复了
+    locks = {GLOBAL.LOCKS.NONE},
+    keys_given = {},
+    room_tags = {},
+    room_choices = { -- 给当前task添加room，我这就只添加上面定义的那一个room，后面数字是节点数，节点数越大，地形就越大
+        ["CUS_MoonLand"] = 3
+    },
+    room_bg = GLOBAL.GROUND.METEOR, -- 地皮类型
+    background_room = "CUS_MoonLand",
+    colour = {
+        r = 0.6,
+        g = 0.6,
+        b = 0.0,
+        a = 1
+    }
+})
+```
 
+接着将上面定义好的task添加到生物群落里去
 
+```lua
+AddTaskSetPreInit("default", function(task)
+    table.insert(task.tasks, "CUS_MoonLand_TASK")
+end)
+-- AddTaskSetPreInit("classic", function(task)
+--     table.insert(task.tasks, "CUS_MoonLand_TASK")
+-- end)
+```
 
+最后将上面定义的room, task, taskset的代码都放到 `modworldgenmain.lua` 文件里，注意，必须要放在这个文件里，放在 modmain.lua 里是不会生效的
 
+创建一个新游戏进游戏看效果
 
+![](images/20210731001135.png)
 
+可以看到刚定义的月岛地形跟主大陆相连了
 

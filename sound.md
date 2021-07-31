@@ -178,4 +178,7 @@ end)
 
 进游戏看效果
 
-<video src="video/1627701055547.mp4" control></video>
+<video width="800" height="450" controls>
+    <source src="video/1627701055547.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>

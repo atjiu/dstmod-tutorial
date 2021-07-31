@@ -39,7 +39,14 @@ replica 翻译过来有复制的意思，顾名思义就是对原组件的一个
 
 它上面有哪些方法，哪些固有属性可以去 [prefab](https://tomoya92.github.io/dstmod-tutorial/#/prefab) 里查看
 
+## Combat:SetRange(attack, hit) hit是什么意思？
 
+- attack 是攻击范围
+- hit 是命中范围
+
+举个例子，SetRange(10, 4)
+
+![](images/20210731213345.png)
 
 
 

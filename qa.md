@@ -6,6 +6,7 @@
 >
 > Build是材质包，也就是存放在MOD文件夹或游戏的data文件夹下的anim文件夹下的那些.zip文件。可以使用同一套Bank，不同的Build来表现不同的形态。比如说人物都是统一使用名为“wilson”的Bank，但每个人物都有自己的Build，通常与人物的prefab名相同。
 
+![](images/20210730113726.png)
 
 ## 以replica结尾的组件与RPC有什么区别
 

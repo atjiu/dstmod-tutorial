@@ -26,6 +26,12 @@ fn参数是level的实例
 
 ## AddTaskSetPreInit(tasksetname, fn)
 
+地图相关api，对taskset集进行操作
+
+比如饥荒内置的两个taskset，一个是default,一个是classic
+
+对应就是创建地图时的生物群落
+
 ## AddTaskSetPreInitAny(fn)
 
 ## AddTaskPreInit(taskname, fn)
@@ -36,9 +42,13 @@ fn参数为task对象
 
 ## AddRoomPreInit(roomname, fn)
 
+地图相关api，对room的操作，在游戏里room就是最小的区域，很多room组成task，很多task组成level
+
 ## AddLocation(arg1, ...)
 
 ## AddLevel(arg1, arg2, ...)
+
+添加level(世界)，比如游戏内置的 forest 就是地上，cave 就是洞穴
 
 ## AddTaskSet(arg1, ...)
 
@@ -83,6 +93,8 @@ id可以是动作名，也可以是动作本身，换句话说，id可以是字�
 ## AddPopup(id)
 
 ## AddMinimapAtlas(atlaspath)
+
+添加小地图上的贴图
 
 ## AddStategraphActionHandler(stategraph, handler)
 
@@ -144,6 +156,8 @@ fn的参数就是component实例
 ## AddPrefabPostInitAny(fn)
 
 ## AddPlayerPostInit(fn)
+
+玩家初始化后的修改api
 
 ## AddPrefabPostInit(prefab, fn)
 

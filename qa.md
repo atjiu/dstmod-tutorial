@@ -6,6 +6,7 @@
 >
 > Build是材质包，也就是存放在MOD文件夹或游戏的data文件夹下的anim文件夹下的那些.zip文件。可以使用同一套Bank，不同的Build来表现不同的形态。比如说人物都是统一使用名为“wilson”的Bank，但每个人物都有自己的Build，通常与人物的prefab名相同。
 
+![](images/20210730113726.png)
 
 ## 以replica结尾的组件与RPC有什么区别
 
@@ -32,7 +33,20 @@ replica 翻译过来有复制的意思，顾名思义就是对原组件的一个
 
 用replica组件来获取数据也是一样，比如玩家饥饿值随游戏时间增加而慢慢减少，每次减少主机都会将更新后的饥饿值封装到replica组件里，说白了就是**饥荒底层里对这些以 replica 后缀结尾的组件进行了特殊处理**
 
+## 代码里的inst是什么意思
 
+简单的理解 inst 就代码的是 prefab，在创建一个prefab的时候，会调用 CreateEntity() 方法生成一个实例，这个实例对象的命名约定的都是inst
+
+它上面有哪些方法，哪些固有属性可以去 [prefab](https://tomoya92.github.io/dstmod-tutorial/#/prefab) 里查看
+
+## Combat:SetRange(attack, hit) hit是什么意思？
+
+- attack 是攻击范围
+- hit 是命中范围
+
+举个例子，SetRange(10, 4)
+
+![](images/20210731213345.png)
 
 
 

@@ -48,6 +48,40 @@
 
 level由taks组成，taks由room组成（比如蚁狮沙漠。它由多个room组成，绿洲room，蚁狮刷新点room等）
 
+**节点类型**
+
+节点类型被用来定义地形生成时的的一些特性，比如可否与其它节点相连，是否可通过等，NODE_TYPE被定义在 constants.lua 文件里
+
+```lua
+NODE_TYPE =
+{
+    Default = 0,		--可以接触任务中范围内的任何其他默认节点,会与其他room全部连接
+    Blank = 1,			--地面无法通行的空房间,海洋会填充
+    Background = 2,     --背景，森林使用
+    Random = 3,         --随机的
+    Blocker = 4,		--在其旁边添加2个空白节点
+    Room = 5,			--Land只能接触通过图形连接到的房间（使用单个Land bidge在其参数周围添加不可通行）,像洞穴里的蝙蝠地形之类的，一条主道，向两边延伸多个凸形模样
+    BackgroundRoom = 6, --背景房，洞穴使用
+	SeparatedRoom = 7,	-- 月岛群的几个小岛,room周围全部填充空白节点
+}
+```
+
+**level类型**
+
+跟节点类型一样，被定义在 constants.lua 文件里
+
+LEVELTYPE = {
+    SURVIVAL = "SURVIVAL", -- 生存
+    CAVE = "CAVE", -- 洞穴
+    ADVENTURE = "ADVENTURE", -- 冒险
+    LAVAARENA = "LAVAARENA", -- 熔炉
+    QUAGMIRE = "QUAGMIRE", -- 暴食
+    TEST = "TEST", -- 测试
+    UNKNOWN = "UNKNOWN", -- 未知
+    CUSTOM = "CUSTOM", -- 自定义
+    CUSTOMPRESET = "CUSTOMPRESET", -- 自定义预设
+}
+
 生成世界的时候，从众多节点中选择一些相近节点组成的节点集，作为组成世界的room。
 
 在游戏中，节点的体现如下图所示，每个虚线的区域就是一个room，一个room一般周围会有5个room相邻

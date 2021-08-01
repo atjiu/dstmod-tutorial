@@ -36,3 +36,4 @@
 
   * [RPC用法](sample-rpc)
   * [添加食谱](/foodrecipe)
+  * [击飞效果](/knockback)

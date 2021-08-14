@@ -5,6 +5,9 @@
 使用api自定义一个RPC
 
 ```lua
+-- AddModRPCHandler() 方法的前两个参数是随便填写的，与 SendModRPCToServer() 方法里的第一个参数里从MOD_RPC表里取的值的键是一一对应的
+-- 一般第一个参数会写上mod名字，第二个参数是当前这个rpc的功能名
+-- 第三个参数是一个函数，函数的第一个参数固定是player对象，后面的参数就是在发RPC时传的数据了，数据的类型可以为整形，浮点型，布尔型，字符型，甚至table，function都是可以的
 AddModRPCHandler("world_time","scale", function(player, timeScale)
     local currentTimeScale = GLOBAL.TheSim:GetTimeScale()  -- 拿到当前世界时间速率
     currentTimeScale = currentTimeScale + timeScale

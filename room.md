@@ -319,3 +319,107 @@ end)
 
 > 猜测 借助 `scripts/map/storygen.lua` 里的方法应该也能对room添加标签或者修改一些地形的操作
 
+## 20210815补充
+
+海洋生成和静态布局补充
+
+首先必须了解一点地面世界生成的流程:
+
+1. 率先生成全部的大陆task
+2. 再是月岛task
+3. 然后生成海洋部分
+
+生成海洋需要level里开启了海洋
+
+海洋部分生成流程：
+
+1. 明确是当前世界
+2. 进行预填充部分，ocean_prefill_setpieces表，类型是静态布局
+3. 将非陆地地皮(此时都是IMPASSABLE类型，值为1)转换为海水(海水有不同的类型)
+4. 填充海洋生物内容，ocean_population表，类型是room ...\scripts\map\rooms\forest\terrain_ocean.lua
+
+现阶段，第2步ocean_prefill_setpieces表里的内容有3类盐堆区和水中木区，都是静态布局。
+它们都是直接使用Ocean_PlaceSetPieces函数进行放置的。
+
+...\scripts\map\ocean_gen.lua
+
+Ocean_PlaceSetPieces函数
+
+这个函数会遍历ocean_prefill_setpieces，将通过key来找到对应的layout，将添加到待生成区域表里。
+待生成区域表洗牌打乱依次生成(PlaceOceanLayout函数)。最终数量可能为0，概率很低。
+
+PlaceOceanLayout函数
+
+通过findLayoutPositions函数来找一个合适的位置，
+有，Ocean_PlaceSetPieces函数内置ReserveAndPlaceLayoutFn函数执行放置工作，并且将这个区域内全部地皮格，添加为预留状态。并返回true
+无，返回false
+
+ReserveAndPlaceLayoutFn函数
+
+主要执行ReserveAndPlaceLayout函数 ...\scripts\map\object_layout.lua
+    执行放置，有禁止旋转，或者如果有指定旋转的话执行目标旋转类型，不然就是随机是否旋转
+    执行添加对象，add_entity函数，这里是...\scripts\map\forest_map.lua 的 add_fn
+布局有add_topology内容，那么往当前拓跋结构添加一个节点，现就蟹奶奶岛用到了
+
+GetLayoutSize函数
+
+有地图层，就返回地图层行数作为布局大小
+没有，通过对象层里的对象的坐标来确认布局大小
+
+findLayoutPositions函数
+
+在世界范围内找合适区域。
+区域大小 = 世界大小 - 2*边缘大小 - 布局大小
+开始坐标 = 随机 0~区域大小
+从开始坐标遍历，查找符合，坐标位置的类型地皮否是指定的类型且没有被预留，然后遍历这个点开始的布局大小区域内地皮是否全部符合。
+是，添加到表中，否，跳过i个点，继续遍历。
+遍历结束条件是，找到数量大于等于目标数量，或者到达遍历坐标到达区域大小
+最后返回查找的结果
+
+第4步，此时已经充满了海水。
+PopulateOcean函数内，依次遍历ocean_population表，执行PopulateWaterType函数。
+
+PopulateWaterType函数，就跟填充room类似
+有静态布局，执行Ocean_PlaceSetPieces函数，用于添加实体的PopulateWorld_AddEntity函数，需要查找到的目标地皮类型是room.value。
+应用通过更改room.value的类型，来修改room的位置。让蟹奶奶岛离岸近些AddRoomPreInit("OceanRough",function(room)room.value = GROUND.SAVANNA end)
+有预制件，则添加预制件
+有分配百分比和分配对象，按pickspawnprefab函数查找合适对象，然后添加
+PopulateWaterPrefabWorldGenCustomizations函数，自定义填充额外实体
+
+
+关于布局一点补充
+
+...\scripts\map\static_layout.lua
+...\scripts\map\object_layout.lua
+
+```lua
+["静态布局名称"] = StaticLayout.Get("静态布局文件",
+{
+	--添加一个节点
+	add_topology = {room_id = "StaticLayoutIsland:HermitcrabIsland", tags = {"RoadPoison", "nohunt", "nohasslers", "not_mainland"}},
+	min_dist_from_land = 0,
+	layout_position =LAYOUT_POSITION.CENTER,
+	areas ={
+		--在 静态布局文件 objects表中的 type=tree_area ，width，height表示在这个区域内。
+		--object_layout文件里使用到，会将下面表内容随机分布在区域内，这个区域要在布局范围内
+		--下面最终都是一张张预制体表，将会根据静态布局进行填充
+		tree_area = function() return math.random() < 0.9 and {"moon_tree"} or nil end,
+		fissure_area = {"moon_fissure"},
+	},
+}),
+local Layouts = require("map/layouts").Layouts
+local StaticLayout = require("map/static_layout")
+Layouts["静态布局的引用名字"] = StaticLayout.Get("map/static_layouts/文件名", {}）
+AddTaskSetPreInit("default",function(data)
+	--向海洋里添加一个静态布局，神话的桃岛也是添到这里
+	data.ocean_prefill_setpieces["HermitcrabIsland"] = 1  --添加蟹奶奶岛静态布局，一个世界就有两蟹奶奶岛
+end)
+--自定义房间里添加自定义静态布局
+AddRoom("房间名字", {contents =  {countstaticlayouts ={["静态布局的引用名字"] = 1, }}})
+--往饥荒的房间里添加静态布局
+AddRoomPreInit("OceanRough",function(room)
+	room["contents"]["countstaticlayouts"]["HermitcrabIsland"] = 2 --蟹奶奶岛变两个
+end)
+```
+
+

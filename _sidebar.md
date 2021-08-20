@@ -5,6 +5,7 @@
   * [制作modicon](/modicon)
   * [尝试使用api](/tryapi)
   * [mod配置项](/modconfig)
+  * [tex与png互转](/textool)
 
 - 进阶
 

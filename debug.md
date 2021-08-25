@@ -86,25 +86,25 @@ end
 -- end
 
 print("============================")
-onxxxfn()
+onxxxfn() -- 原始函数执行一下，看看输出结果
 print("============================")
 
 local i = 0
 local _value
 local _name = ''
-while _name ~= 'bar' do
+while _name ~= 'bar' do -- while循环找一下bar()函数的位置
     i = i + 1
     _name, _value = debug.getupvalue(onxxxfn, i)
 end
 
-print(i, _name, _value)
+print(i, _name, _value) -- 将找到的位置信息打印出来
 
-debug.setupvalue(onxxxfn, i, function()
+debug.setupvalue(onxxxfn, i, function() -- 通过 setupvalue()函数将原bar()函数的内容给修改成自己想要的
     print("bar?")
 end)
 
 print("============================")
-onxxxfn()
+onxxxfn() -- 修改后再执行一下，看看输出结果
 print("============================")
 ```
 

@@ -422,4 +422,240 @@ AddRoomPreInit("OceanRough",function(room)
 end)
 ```
 
+## 20210830补充
+
+就只谈拓扑结构，仅是个人根据饥荒所知，有局限性，没有学过好好学过拓扑结构
+
+### 一、类型：
+
+- Story 拓扑结构  核心是也是图，全部的地形形成的图，都是它的子图
+- task地形数据 转换为 Graph(图)来使用，记录全部节点和全部边(节点与节点是否连接)
+- room房间数据 转换为 Node(节点)来使用，这也是拓扑结构基本单位。
+
+
+### 二、大陆的形成
+
+拓扑结构最终形成为一张很大的网，由节点和边组成。
+
+怎么形成的？
+
+根据传入的数据，哪种世界(森林、洞穴、其他)、已经选择了哪些task地形和世界设置等生成一个Story拓扑结构。
+
+接下来就是执行GenerationPipeline函数
+
+1. 这个函数会先生成全部mainland(大陆)类型的task地形，包括地形的节点和边，地形内节点之间连接，地形与地形的连接。
+2. 然后对大陆地形进行添加BG节点，使得地形不规整
+3. 再对大陆增加凹节点，进一步平滑一些
+4. 然后添加其他没有被添加的setpieces
+5. 最后添加海洋room的内容
+
+就完成了大陆地形的生成
+
+### 三、一个地形的形成
+
+task表内的入口房间(entrance_room)和选中房间(room_choices)汇总(用的是堆栈)，创建一个图，并记录到WorldSim中再，遍历房间集（堆栈弹出一个值）
+
+生成room房间对应的Node节点，是否存在hub_room中心room，存在记录下这个对应的节点
+
+- 是否形成一圈make_loop，是，则将上一个非中心room的节点连接成边结束遍历，后
+- 是否形成一圈make_loop，是，将只有一条边的两个节点连接成边
+- 是否存在hub_room中心room，是，将对应节点与图内其他节点连接成边
+- 是否存在crossLinkFactor，是，图内节点随机连接(最大次数20次)
+
+一个地形的图就生成了
+
+### 四、地形之间的连接
+
+本质上也是节点与节点之间的连接
+
+valid_start_tasks 起始地形 存在，那么由它开始，没有则从地形集里随机一个为起始地形。
+然后，根据布局类型，森林使用LinkNodesByKeys函数，洞穴、熔岩竞技场使用RestrictNodesByKey函数，来对全部地形进行连接
+更改LinkNodesByKeys函数，更改各个地形连接的节点就能宏观控制地形的生成
+地形连接完成后，返回了的最后地形的节点，再随机一个起始地形的节点，
+再看是否要以新的图的一个空白节点(type=1,value=1)来分别和起始节点、结束节点连接成边
+
+### 五、创建图、节点、边
+
+全部的图都要是拓扑结构的子图，而且必须要与其他至少一个图连接，不然报错
+
+```lua
+--创建图
+local task_id1 = "id不要有重复，不然报错1"
+local task_id2 = "id不要有重复，不然报错2"
+--具体看源码
+local node_task1 = Graph(task_id1, {parent=self.rootNode, default_bg=GROUND.IMPASSABLE, colour = {r=0,g=0,b=0,a=1}, background="BGImpassable" })
+local node_task2 = Graph(task_id2, {parent=self.rootNode, default_bg=GROUND.IMPASSABLE, colour = {r=0,g=0,b=0,a=1}, background="BGImpassable" })
+
+--要注册，不然无效的图
+WorldSim:AddChild(self.rootNode.id, task_id1, GROUND.IMPASSABLE, 0, 0, 0, 1, "blank")
+WorldSim:AddChild(self.rootNode.id, task_id2, GROUND.IMPASSABLE, 0, 0, 0, 1, "blank")
+
+--创建图的节点
+--图:AddNode{id,data={--[[对应room内的数据]]}}
+local n1 = node_task1:AddNode({
+	id="节点id不可以重复，不然报错",
+	data={
+			type=NODE_TYPE.Background, --房间类型，值=1，空白的，被海水填充
+			name="这个可以重复",
+			tags = {"RoadPoison", "ForceDisconnected"},	--可以没有tags RoadPoison是禁止生成道路
+			colour={r=0.3,g=.8,b=.5,a=.50},
+			value = GROUND.OCEAN_COASTAL --地皮类型，这里是海水的一种
+			}
+}))
+local n2 = node_task2:AddNode({
+	id="节点id不可以重复，不然报错2",
+	data={
+			type=NODE_TYPE.Background, --房间类型，值=1，空白的，被海水填充
+			name="这个可以重复",
+			tags = {"RoadPoison", "ForceDisconnected"},	--可以没有tags RoadPoison是禁止生成道路
+			colour={r=0.3,g=.8,b=.5,a=.50},
+			value = GROUND.OCEAN_COASTAL --地皮类型，这里是海水的一种
+			}
+}))
+local n3 = node_task2:AddNode({
+	id="节点id不可以重复，不然报错3",
+	data={
+			type=NODE_TYPE.Background, --房间类型，值=1，空白的，被海水填充
+			name="这个可以重复",
+			tags = {"RoadPoison", "ForceDisconnected"},	--可以没有tags RoadPoison是禁止生成道路
+			colour={r=0.3,g=.8,b=.5,a=.50},
+			value = GROUND.OCEAN_COASTAL --地皮类型，这里是海水的一种
+			}
+}))
+
+--图内部节点连接，连接了n1和n2形成了一条边
+node_task2:AddEdge({id = "不能有重复id", node1id=n2.id, node2id=n3.id})
+
+
+--连接两个图
+self.rootNode:LockGraph("id不能重复啊", 	n1.node, n2, {type="none", key=KEYS.NONE, node=nil})
+```
+
+### 六、例子
+
+modworldgenmain.lua
+```lua
+GLOBAL.setmetatable(env,{__index=function(t,k) return GLOBAL.rawget(GLOBAL,k) end})
+
+require("map/network")
+require("util")
+
+local GetRoomByName = require("map/rooms").GetRoomByName
+local GetTaskByName = require("map/tasks").GetTaskByName
+
+AddGlobalClassPostConstruct("map/storygen","Story",function(self, id, tasks, terrain, gen_params, level)
+	local function LinkNodes_MOD(self)
+		local task_id = "MOD_TASK_"..tostring(self.region_link_tasks)
+		local node_task = Graph(task_id, {parent=self.rootNode, default_bg=GROUND.IMPASSABLE, colour = {r=0,g=0,b=0,a=1}, background="BGImpassable" })
+		WorldSim:AddChild(self.rootNode.id, task_id, GROUND.IMPASSABLE, 0, 0, 0, 1, "blank")
+
+		local n1 = node_task:AddNode({
+							id=task_id..":REGION_LINK_SUB_"..tostring(1),
+							data={
+									type= 1, --房间类型，值=1，空白的，被海水填充
+									name="REGION_LINK_SUB",
+									tags = {"RoadPoison", "ForceDisconnected"},
+									colour={r=0.3,g=.8,b=.5,a=.50},
+									value = GROUND.OCEAN_COASTAL
+							}
+					})
+		local n2 = node_task:AddNode({
+					id=task_id..":REGION_LINK_SUB_"..tostring(2),
+					data={
+							type=1, --房间类型，值=1，空白的，被海水填充
+							name="REGION_LINK_SUB",
+							tags = {"RoadPoison", "ForceDisconnected"},
+							colour={r=0.3,g=.8,b=.5,a=.50},
+							value = GROUND.OCEAN_COASTAL
+							--value = GROUND.GRASS
+					}
+			})
+		-- local n3 = node_task:AddNode({
+		-- 			id=task_id..":REGION_LINK_SUB_"..tostring(3),
+		-- 			data={
+		-- 					type=0, --房间类型，值=1，空白的，被海水填充
+		-- 					name="REGION_LINK_SUB",
+		-- 					--tags = {"RoadPoison"},
+		-- 					colour={r=0.3,g=.8,b=.5,a=.50},
+		-- 					value = GROUND.GRASS
+		-- 			}
+		-- 	})
+
+		-- node_task:AddEdge({node1id=n1.id, node2id=n3.id})
+		-- node_task:AddEdge({node1id=n2.id, node2id=n3.id})
+		node_task:AddEdge({node1id=n1.id, node2id=n2.id})
+
+		self.region_link_tasks = self.region_link_tasks + 1
+		return n1,n2
+	end
+	local function LinkNodesByKeysCS(self, startParentNode, unusedTasks)
+		local function GetRandomNodeForEntrance_(task,rooms)
+			local room = task:GetRandomNodeForEntrance()
+			while table.removearrayvalue(rooms,room) or (task.entrancenode and room == task.entrancenode) do
+				room = task:GetRandomNodeForEntrance()
+			end
+			return room
+		end
+		local function GetRandomNodeForExit_(task,rooms)
+			local room = task:GetRandomNodeForExit()
+			while table.removearrayvalue(rooms,room) do
+				room = task:GetRandomNodeForExit()
+			end
+			return room
+		end
+		local lastNode = startParentNode
+		local usedTasks = {}
+		local currentNode = nil
+		startParentNode.story_depth = 0  --故事深度
+		local story_depth = 1
+
+		local bm = 1
+
+		--记录已经与其他地形链接的room
+		local rooms = {}
+
+		while GetTableSize(unusedTasks) > 0 do
+			local effectiveLastNode = startParentNode
+
+			local currentNode = GetRandomItem(unusedTasks)
+
+			currentNode.story_depth = story_depth --当前节点故事深度=当前故事深度
+			story_depth = story_depth + 1 --循环一次+1
+
+			local lastNodeExit = GetRandomNodeForExit_(effectiveLastNode,rooms)
+		    local currentNodeEntrance = GetRandomNodeForEntrance_(currentNode,rooms)
+		    table.insert(rooms,lastNodeExit)
+		    table.insert(rooms,currentNodeEntrance)
+
+		 	local n1,n2 = LinkNodes_MOD(self)
+
+			self.rootNode:LockGraph(effectiveLastNode.id..'->'..n1.id, lastNodeExit, n1, {type="none", key=self.tasks[currentNode.id].locks, node=nil})
+			self.rootNode:LockGraph(currentNode.id..'->'..n2.id, currentNodeEntrance, n2, {type="none", key=self.tasks[currentNode.id].locks, node=nil})
+
+		    unusedTasks[currentNode.id] = nil
+	        usedTasks[bm] = currentNode
+	        bm = bm + 1
+	        lastNode = currentNode
+	        currentNode = nil
+		end
+
+		for k,v in pairs(usedTasks) do
+			local task1 = v
+			local task2 = usedTasks[k+1] or usedTasks[1]
+			local lastNodeExit = GetRandomNodeForExit_(task1,rooms)
+		    local currentNodeEntrance = GetRandomNodeForEntrance_(task2,rooms)
+		    table.insert(rooms,lastNodeExit)
+		    table.insert(rooms,currentNodeEntrance)
+			self.rootNode:LockGraph(task1.id..'->'..task2.id, lastNodeExit, currentNodeEntrance, {type="none", key=self.tasks[task1.id].locks, node=nil})
+		end
+		return startParentNode:GetRandomNodeForExit()
+	end
+
+	self.LinkNodesByKeys = function(self, startParentNode, unusedTasks)
+		return LinkNodesByKeysCS(self, startParentNode, unusedTasks)
+	end
+end)
+```
+
+生成的效果图 ![](images/QQ20210830-203638@2x.png)
 

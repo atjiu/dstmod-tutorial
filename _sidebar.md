@@ -40,3 +40,4 @@
   * [添加食谱](/sample-foodrecipe)
   * [击飞效果](/sample-knockback)
   * [建筑添加范围显示](/sample-deployrange)
+  * [添加容器](/sample-addcontainer)

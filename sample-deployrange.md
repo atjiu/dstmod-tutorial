@@ -118,3 +118,5 @@ return Prefab("servant_house", fn, assets, prefabs),
     MakePlacer("servant_house_placer", "firefighter_placement", "firefighter_placement", "idle", true, nil, nil,
         PLACER_SCALE, nil, nil, placer_postinit_fn)
 ```
+
+![](images/20210902135024.png)

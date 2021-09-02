@@ -37,5 +37,6 @@
 - 案例
 
   * [RPC用法](sample-rpc)
-  * [添加食谱](/foodrecipe)
-  * [击飞效果](/knockback)
+  * [添加食谱](/sample-foodrecipe)
+  * [击飞效果](/sample-knockback)
+  * [建筑添加范围显示](/sample-deployrange)

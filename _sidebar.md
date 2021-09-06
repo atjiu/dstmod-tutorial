@@ -34,6 +34,7 @@
   * [节点](room)
   * [debug](debug)
   * [贴图大小](image-size)
+  * [标签](tags)
 
 - 案例
 

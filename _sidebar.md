@@ -33,6 +33,7 @@
 
   * [节点](room)
   * [debug](debug)
+  * [贴图大小](image-size)
 
 - 案例
 

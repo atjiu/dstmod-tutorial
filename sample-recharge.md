@@ -4,10 +4,7 @@
 
 看看效果
 
-<video width="800" height="450" controls>
-    <source src="video/1630917216016.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+![](images/1630917216016.gif)
 
 ## 流程
 

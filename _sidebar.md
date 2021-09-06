@@ -41,5 +41,6 @@
   * [RPC用法](sample-rpc)
   * [添加食谱](/sample-foodrecipe)
   * [击飞效果](/sample-knockback)
+  * [冷却效果](/sample-recharge)
   * [建筑添加范围显示](/sample-deployrange)
   * [添加容器](/sample-addcontainer)

@@ -10,82 +10,82 @@
 
 | 方法名                         | 类型                                     | 解释                                                   |
 |--------------------------------|------------------------------------------|--------------------------------------------------------|
-| OverrideShade                  | function: 000000002833CEA0               |                                                        |
-| SetFinalOffset                 | function: 000000002833B5A0               |                                                        |
-| SetSymbolExchange              | function: 000000002833C7E0               |                                                        |
-| SetOrientation                 | function: 000000002833CD20               |                                                        |
-| GetSortOrder                   | function: 000000002833B7E0               |                                                        |
-| GetInheritsSortKey             | function: 000000002833CAA0               |                                                        |
-| SetSortOrder                   | function: 000000002833B7A0               |                                                        |
-| SetClientSideBuildOverrideFlag | function: 000000002833C160               |                                                        |
-| SetBloomEffectHandle           | function: 000000002833D060               |                                                        |
-| GetSkinBuild                   | function: 000000002833CA60               |                                                        |
-| SetDepthBias                   | function: 000000002833B720               |                                                        |
-| SetDepthTestEnabled            | function: 000000002833B6E0               |                                                        |
-| CompareSymbolBuilds            | function: 000000002833D0A0               |                                                        |
-| ClearOverrideBuild             | function: 000000002833B3E0               |                                                        |
+| OverrideShade                  | function                                 |                                                        |
+| SetFinalOffset                 | function                                 |                                                        |
+| SetSymbolExchange              | function                                 |                                                        |
+| SetOrientation                 | function                                 |                                                        |
+| GetSortOrder                   | function                                 |                                                        |
+| GetInheritsSortKey             | function                                 |                                                        |
+| SetSortOrder                   | function                                 |                                                        |
+| SetClientSideBuildOverrideFlag | function                                 |                                                        |
+| SetBloomEffectHandle           | function                                 |                                                        |
+| GetSkinBuild                   | function                                 |                                                        |
+| SetDepthBias                   | function                                 |                                                        |
+| SetDepthTestEnabled            | function                                 |                                                        |
+| CompareSymbolBuilds            | function                                 |                                                        |
+| ClearOverrideBuild             | function                                 |                                                        |
 | Show                           | function(layername)                      | 显示图层(Layer)                                        |
-| OverrideSkinSymbol             | function: 000000002833B820               |                                                        |
-| AssignItemSkins                | function: 000000002833BE20               |                                                        |
-| SetSortWorldOffset             | function: 000000002833BC20               |                                                        |
-| OverrideItemSkinSymbol         | function: 000000002833B320               |                                                        |
-| SetMultColour                  | function: 000000002833BBA0               |                                                        |
-| SetHaunted                     | function: 000000002833CAE0               |                                                        |
-| GetCurrentAnimationTime        | function: 000000002833C2A0               |                                                        |
+| OverrideSkinSymbol             | function                                 |                                                        |
+| AssignItemSkins                | function                                 |                                                        |
+| SetSortWorldOffset             | function                                 |                                                        |
+| OverrideItemSkinSymbol         | function                                 |                                                        |
+| SetMultColour                  | function                                 |                                                        |
+| SetHaunted                     | function                                 |                                                        |
+| GetCurrentAnimationTime        | function                                 |                                                        |
 | ClearAllOverrideSymbols        | function()                               | 清除所有覆盖通道                                       |
-| SetOceanBlendParams            | function: 000000002833C720               |                                                        |
-| PushAnimation                  | function: 000000002833BDE0               |                                                        |
-| GetMultColour                  | function: 000000002833C920               |                                                        |
-| ClearDefaultEffectHandle       | function: 000000002833CD60               |                                                        |
-| SetPercent                     | function: 000000002833C0E0               |                                                        |
-| SetAddColour                   | function: 000000002833B560               |                                                        |
-| ClearBloomEffectHandle         | function: 000000002833C320               |                                                        |
+| SetOceanBlendParams            | function                                 |                                                        |
+| PushAnimation                  | function                                 |                                                        |
+| GetMultColour                  | function                                 |                                                        |
+| ClearDefaultEffectHandle       | function                                 |                                                        |
+| SetPercent                     | function                                 |                                                        |
+| SetAddColour                   | function                                 |                                                        |
+| ClearBloomEffectHandle         | function                                 |                                                        |
 | SetBank                        | function(bankname)                       | spriter里动画的父级节点的名字                          |
-| UsePointFiltering              | function: 000000002833D120               |                                                        |
-| GetCurrentFacing               | function: 000000002833C420               |                                                        |
-| SetBankAndPlayAnimation        | function: 000000002833BF20               |                                                        |
-| GetAddColour                   | function: 000000002833C260               |                                                        |
-| HideSymbol                     | function: 000000002833BFE0               |                                                        |
-| SetLayer                       | function: 000000002833B520               |                                                        |
-| SetRayTestOnBB                 | function: 000000002833BDA0               |                                                        |
-| SetWorldSpaceAmbientLightPos   | function: 000000002833C460               |                                                        |
-| IsCurrentAnimation             | function: 000000002833CE20               |                                                        |
-| SetManualBB                    | function: 000000002833CFE0               |                                                        |
-| SetHighlightColour             | function: 000000002833B620               |                                                        |
+| UsePointFiltering              | function                                 |                                                        |
+| GetCurrentFacing               | function                                 |                                                        |
+| SetBankAndPlayAnimation        | function                                 |                                                        |
+| GetAddColour                   | function                                 |                                                        |
+| HideSymbol                     | function                                 |                                                        |
+| SetLayer                       | function                                 |                                                        |
+| SetRayTestOnBB                 | function                                 |                                                        |
+| SetWorldSpaceAmbientLightPos   | function                                 |                                                        |
+| IsCurrentAnimation             | function                                 |                                                        |
+| SetManualBB                    | function                                 |                                                        |
+| SetHighlightColour             | function                                 |                                                        |
 | Hide                           | function(layername)                      | 隐藏图层(Layer)                                        |
-| ClearOverrideSymbol            | function: 000000002833BBE0               | 清除覆盖的通道                                         |
-| GetSymbolOverride              | function: 000000002833BAA0               | 获取覆盖通道名                                         |
-| GetCurrentAnimationLength      | function: 000000002833CF20               |                                                        |
-| Pause                          | function: 000000002833BA20               |                                                        |
-| Resume                         | function: 000000002833C060               |                                                        |
-| SetDeltaTimeMultiplier         | function: 000000002833B420               |                                                        |
-| SetUILightParams               | function: 000000002833C560               |                                                        |
-| SetErosionParams               | function: 000000002833CC60               |                                                        |
-| BuildHasSymbol                 | function: 000000002833BFA0               |                                                        |
-| ShowSymbol                     | function: 000000002833B2E0               |                                                        |
-| ClearSymbolExchanges           | function: 000000002833C5E0               |                                                        |
-| UseColourCube                  | function: 000000002833C3E0               |                                                        |
+| ClearOverrideSymbol            | function                                 | 清除覆盖的通道                                         |
+| GetSymbolOverride              | function                                 | 获取覆盖通道名                                         |
+| GetCurrentAnimationLength      | function                                 |                                                        |
+| Pause                          | function                                 |                                                        |
+| Resume                         | function                                 |                                                        |
+| SetDeltaTimeMultiplier         | function                                 |                                                        |
+| SetUILightParams               | function                                 |                                                        |
+| SetErosionParams               | function                                 |                                                        |
+| BuildHasSymbol                 | function                                 |                                                        |
+| ShowSymbol                     | function                                 |                                                        |
+| ClearSymbolExchanges           | function                                 |                                                        |
+| UseColourCube                  | function                                 |                                                        |
 | OverrideSymbol                 | function(oldsymbol, newbuild, newsymbol) | 覆盖旧通道                                             |
-| SetClientsideBuildOverride     | function: 000000002833C620               |                                                        |
-| OverrideMultColour             | function: 000000002833C660               |                                                        |
-| SetDefaultEffectHandle         | function: 000000002833CBE0               |                                                        |
-| FastForward                    | function: 000000002833CE60               |                                                        |
+| SetClientsideBuildOverride     | function                                 |                                                        |
+| OverrideMultColour             | function                                 |                                                        |
+| SetDefaultEffectHandle         | function                                 |                                                        |
+| FastForward                    | function                                 |                                                        |
 | SetBuild                       | function(buildname)                      | buildname就是scml文件的名字                            |
-| SetScale                       | function: 000000002833B920               |                                                        |
-| SetFloatParams                 | function: 000000002833CCA0               |                                                        |
-| SetMultiSymbolExchange         | function: 000000002833C3A0               |                                                        |
-| GetBuild                       | function: 000000002833CC20               |                                                        |
-| GetSymbolPosition              | function: 000000002833B460               |                                                        |
-| GetCurrentAnimationFrame       | function: 000000002833CF60               |                                                        |
-| AnimDone                       | function: 000000002833BF60               |                                                        |
-| IsSymbolOverridden             | function: 000000002833D0E0               |                                                        |
-| SetDepthWriteEnabled           | function: 000000002833B6A0               |                                                        |
-| AddOverrideBuild               | function: 000000002833B360               |                                                        |
-| SetInheritsSortKey             | function: 000000002833BCE0               |                                                        |
+| SetScale                       | function                                 |                                                        |
+| SetFloatParams                 | function                                 |                                                        |
+| SetMultiSymbolExchange         | function                                 |                                                        |
+| GetBuild                       | function                                 |                                                        |
+| GetSymbolPosition              | function                                 |                                                        |
+| GetCurrentAnimationFrame       | function                                 |                                                        |
+| AnimDone                       | function                                 |                                                        |
+| IsSymbolOverridden             | function                                 |                                                        |
+| SetDepthWriteEnabled           | function                                 |                                                        |
+| AddOverrideBuild               | function                                 |                                                        |
+| SetInheritsSortKey             | function                                 |                                                        |
 | PlayAnimation                  | function(animname, loop)                 | 播放动画，animname：动画名，loop：是否循环播放，默认是false |
-| SetTime                        | function: 000000002833C120               |                                                        |
-| SetLightOverride               | function: 000000002833CDA0               |                                                        |
-| SetSkin                        | function: 000000002833BD60               |                                                        |
+| SetTime                        | function                                 |                                                        |
+| SetLightOverride               | function                                 |                                                        |
+| SetSkin                        | function                                 |                                                        |
 
 ## 层，通道
 
@@ -169,6 +169,10 @@ AddPrefabPostInit("pigking", function(inst)
     -- inst.AnimState:ClearOverrideSymbol("pigking_torso")
 end)
 ```
+
+效果图
+
+![](images/wound_pig_king.gif)
 
 ----
 

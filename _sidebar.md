@@ -35,6 +35,7 @@
   * [debug](debug)
   * [贴图大小](image-size)
   * [标签](tags)
+  * [动画](animstate)
 
 - 案例
 

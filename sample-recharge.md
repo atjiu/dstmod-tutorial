@@ -2,17 +2,21 @@
 >
 > 与其说是冷却功能，但组件名是充能的意思，嘛，习惯了，下面就叫冷却了
 
+> **喜大普奔，官方在这次旺达更新时把冷却组件给加回来了，这样用起来就更简单了**
+
 看看效果
 
 ![](images/1630917216016.gif)
 
 ## 流程
 
-给prefab添加 `rechargeable` 组件后，当需要冷却时，就只需调用一下 `StartRecharging()` 方法即可，在这个方法里会推送一个事件 `rechargechange` 然后在玩家的 `inventoryitem_replica` 组件里会接收这个事件进行效果的展示
+给prefab添加 `rechargeable` 组件后，当需要冷却时，就只需调用一下 `Discharge()` 方法即可，在这个方法里会推送一个事件 `rechargechange` 然后在玩家的 `inventoryitem_replica` 组件里会接收这个事件进行效果的展示
 
-所以我们就只缺一个 `rechargeable` 组件而已，把组件添加到mod里，在合适的位置调用一下 `StartRecharging()` 方法就有效果了
+所以我们就只缺一个 `rechargeable` 组件而已，把组件添加到mod里，在合适的位置调用一下 `Discharge()` 方法就有效果了
 
 ## 组件
+
+**这个组件代码已经不需要了**，直接往下翻，看使用方法即可
 
 scripts/components/rechargeable.lua
 ```lua
@@ -126,7 +130,7 @@ end
 return Rechargeable
 ```
 
-## 使用
+用法
 
 我这里用的是传送魔杖做的例子
 
@@ -154,6 +158,34 @@ AddPrefabPostInit("telestaff", function(inst)
 
             -- 开启冷却
             inst.components.rechargeable:StartRecharging()
+        end)
+    end
+end)
+```
+
+## 使用
+
+使用官方的冷却组件，我这里用的是传送魔杖做的例子
+
+```lua
+AddPrefabPostInit("telestaff", function(inst)
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    -- 判断有没有冷却组件，没有的话，就添加上
+    if not inst.components.rechargeable then
+        inst:AddComponent("rechargeable") -- 添加冷却组件
+    end
+
+    -- hook 施法函数，在施法完成时开启冷却
+    -- 我这只做了效果，没做功能（就是说没限制施法完后在冷却阶段是不能施法的，这个我没限制）
+    if inst.components.spellcaster then
+        local spellfn = inst.components.spellcaster.spell
+        inst.components.spellcaster:SetSpellFn(function(inst, target)
+            spellfn(inst, target)
+
+            -- 开启冷却
+            inst.components.rechargeable:Discharge(20) -- 20是冷却时间
         end)
     end
 end)

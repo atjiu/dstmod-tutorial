@@ -58,7 +58,7 @@ replica 翻译过来有复制的意思，顾名思义就是对原组件的一个
 
 有`container`组件的实体表示容器，比如：箱子，锅，冰箱。
 
-有`inventoryitem`组件的实体是可以放进带有`inventory`实体里的
+有`inventoryitem`组件的实体是可以放进带有`inventory`或者`container`组件的实体里的
 
 
 

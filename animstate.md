@@ -29,7 +29,7 @@
 | AssignItemSkins                | function                                 |                                                        |
 | SetSortWorldOffset             | function                                 |                                                        |
 | OverrideItemSkinSymbol         | function                                 |                                                        |
-| SetMultColour                  | function                                 |                                                        |
+| SetMultColour                  | function(r,g,b,a)                        | 颜色叠乘，受原图颜色影响，参数0-1                        |
 | SetHaunted                     | function                                 |                                                        |
 | GetCurrentAnimationTime        | function                                 |                                                        |
 | ClearAllOverrideSymbols        | function()                               | 清除所有覆盖通道                                       |
@@ -37,8 +37,8 @@
 | PushAnimation                  | function                                 |                                                        |
 | GetMultColour                  | function                                 |                                                        |
 | ClearDefaultEffectHandle       | function                                 |                                                        |
-| SetPercent                     | function                                 |                                                        |
-| SetAddColour                   | function                                 |                                                        |
+| SetPercent                     | function("transform_ent_mad", 1)         | 动画播放百分比，固定帧，不会动（动画名，百分比）            |
+| SetAddColour                   | function(r,g,b,a)                        | 颜色叠加，几乎不受原图颜色影响，参数0-1                  |
 | ClearBloomEffectHandle         | function                                 |                                                        |
 | SetBank                        | function(bankname)                       | spriter里动画的父级节点的名字                          |
 | UsePointFiltering              | function                                 |                                                        |
@@ -49,19 +49,19 @@
 | SetLayer                       | function                                 |                                                        |
 | SetRayTestOnBB                 | function                                 |                                                        |
 | SetWorldSpaceAmbientLightPos   | function                                 |                                                        |
-| IsCurrentAnimation             | function                                 |                                                        |
+| IsCurrentAnimation             | function(name)                           | 当前动画名是否是name                                   |
 | SetManualBB                    | function                                 |                                                        |
 | SetHighlightColour             | function                                 |                                                        |
 | Hide                           | function(layername)                      | 隐藏图层(Layer)                                        |
 | ClearOverrideSymbol            | function                                 | 清除覆盖的通道                                         |
 | GetSymbolOverride              | function                                 | 获取覆盖通道名                                         |
-| GetCurrentAnimationLength      | function                                 |                                                        |
+| GetCurrentAnimationLength      | function()                               | 动画总长度，单位：秒，1 帧是 1/30 秒，0.33333 秒           |
 | Pause                          | function                                 |                                                        |
 | Resume                         | function                                 |                                                        |
-| SetDeltaTimeMultiplier         | function                                 |                                                        |
+| SetDeltaTimeMultiplier         | function(multiplier)                     | 动画播放速度（速度倍数）                                 |
 | SetUILightParams               | function                                 |                                                        |
 | SetErosionParams               | function                                 |                                                        |
-| BuildHasSymbol                 | function                                 |                                                        |
+| BuildHasSymbol                 | function(build, symbol)                  | 是否有该build下的通道                                  |
 | ShowSymbol                     | function                                 |                                                        |
 | ClearSymbolExchanges           | function                                 |                                                        |
 | UseColourCube                  | function                                 |                                                        |
@@ -71,7 +71,7 @@
 | SetDefaultEffectHandle         | function                                 |                                                        |
 | FastForward                    | function                                 |                                                        |
 | SetBuild                       | function(buildname)                      | buildname就是scml文件的名字                            |
-| SetScale                       | function                                 |                                                        |
+| SetScale                       | function(x,y,z)                          | 贴图缩放,值范围：(0-1]                                    |
 | SetFloatParams                 | function                                 |                                                        |
 | SetMultiSymbolExchange         | function                                 |                                                        |
 | GetBuild                       | function                                 |                                                        |
@@ -83,7 +83,7 @@
 | AddOverrideBuild               | function                                 |                                                        |
 | SetInheritsSortKey             | function                                 |                                                        |
 | PlayAnimation                  | function(animname, loop)                 | 播放动画，animname：动画名，loop：是否循环播放，默认是false |
-| SetTime                        | function                                 |                                                        |
+| SetTime                        | function(time)                           | 设置当前动画从第几秒开始播放（秒）                       |
 | SetLightOverride               | function                                 |                                                        |
 | SetSkin                        | function                                 |                                                        |
 
@@ -179,3 +179,17 @@ end)
 骚操作
 
 当使用 `inst.AnimState:OverrideSymbol()` 方法试图去覆盖旧通道时，当传的第二个或者第三个参数不存在时，贴图则会消失，也是一种变相的隐藏贴图的方式
+
+## 人物通道
+
+**人物的手持通道有坑，这里单独拿出来说一下**
+
+当做一件武器时，装备到手上，手部的通道名是 `swap_object` ，替换的话，一般写法都是 `owner.AnimState:OverrideSymbol("swap_object", "swap_spear", "swap_spear")`
+
+但是如果按照上面实操中的方法来创建新通道时，进入游戏会发现贴图丢失了
+
+解决办法：
+
+人物手持的贴图在制作时，添加动画的名字就不能随便写了，一定要写`BUILD`，在spriter里把动画做好后，打成zip包，再将zip包里的 `anim.bin` 给删掉，然后再用就能在游戏里显示贴图了
+
+至于原理，貌似挺复杂的，我也不是太清楚，在这就不解释了 :)

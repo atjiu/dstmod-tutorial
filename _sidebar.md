@@ -24,6 +24,7 @@
   * [anim](anim)
   * [sound](sound)
   * [widget](widget)
+  * [ui](ui)
   * [map](map)
   * [brain](brain)
   * [monster](monster)

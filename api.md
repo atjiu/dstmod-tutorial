@@ -218,6 +218,18 @@ fn参数就是brain的实例
 
 参数很多，可以参照 `recipes.lua` 里官方定义的配方来添加自己想要的配方
 
+- name：放置物的Prefab名，一般约定为原Prefab名_placer
+- bank：放置物的Bank
+- build：放置物的Build
+- anim：放置物用于播放的动画，一般约定为idle
+- onground：取值为true或false，是否设置为紧贴地面。请参考前面AnimState的内容
+- snap：取值为true或false，这个参数目前无用，设置为nil即可
+- metersnap：取值为true或false，与围墙有关，一般建筑物用不上，设置为nil即可。
+- scale：缩放大小
+- fixedcameraoffset：固定偏移
+- facing：设置有几个面，参考AnimState的内容
+- postinit_fn：特殊处理
+
 ## AddRecipeTab(rec_str, rec_sort, rec_atlas, rec_icon, rec_owner_tag, rec_crafting_station)
 
 制作科技栏

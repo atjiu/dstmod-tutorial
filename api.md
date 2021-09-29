@@ -218,17 +218,18 @@ fn参数就是brain的实例
 
 参数很多，可以参照 `recipes.lua` 里官方定义的配方来添加自己想要的配方
 
-- name：放置物的Prefab名，一般约定为原Prefab名_placer
-- bank：放置物的Bank
-- build：放置物的Build
-- anim：放置物用于播放的动画，一般约定为idle
-- onground：取值为true或false，是否设置为紧贴地面。请参考前面AnimState的内容
-- snap：取值为true或false，这个参数目前无用，设置为nil即可
-- metersnap：取值为true或false，与围墙有关，一般建筑物用不上，设置为nil即可。
-- scale：缩放大小
-- fixedcameraoffset：固定偏移
-- facing：设置有几个面，参考AnimState的内容
-- postinit_fn：特殊处理
+- name：Prefab名
+- ingredients：成分表
+- tab：物品栏分类
+- level：科技等级
+- placer：建筑物放置物，也就是制造建筑时显示的那个图像（实质上也是个Prefab）是否有placer(设置不能被绿杖拆解)
+- min_spacing：最小间隔
+- nounlock：是否可以离开制作台制作--远古物品只能在制作台上制作。nil则可以离开制作台
+- numtogive：制作数量，若填nil则为制作1个。
+- builder_tag：制作者需要拥有的Tag（标签），填nil则所有人都可以做--需要的标签（比如女武神的配方需要女武神的自有标签才可以看得到）
+- atlas：制作栏图片文档路径
+- image：制作栏图片文件名，当名字与Prefab名相同时，可省略。
+- testfn：自定义检测函数，需要满足该函数才能制作物品，不常用。
 
 ## AddRecipeTab(rec_str, rec_sort, rec_atlas, rec_icon, rec_owner_tag, rec_crafting_station)
 
@@ -240,6 +241,22 @@ fn参数就是brain的实例
 - rec_icon: 材质生成的tex文件名
 - rec_owner_tag: 人物专属科技标签（？我还不确定）
 - rec_crafting_station
+
+## MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn, offset, onfailedplacement)
+
+制作放置物，比如猪房在建造时的阴影
+
+- name：放置物的Prefab名，一般约定为原Prefab名_placer
+- bank：放置物的Bank
+- build：放置物的Build
+- anim：放置物用于播放的动画，一般约定为idle
+- onground：取值为true或false，是否设置为紧贴地面。请参考前面AnimState的内容
+- snap：取值为true或false，这个参数目前无用，设置为nil即可
+- metersnap：取值为true或false，与围墙有关，一般建筑物用不上，设置为nil即可。
+- scale：缩放大小
+- fixedcameraoffset：固定偏移
+- facing：设置有几个面，参考AnimState的内容
+- postinit_fn：特殊处理
 
 ## LoadPOFile(path, lang)
 

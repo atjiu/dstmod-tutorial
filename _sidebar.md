@@ -48,3 +48,4 @@
   * [建筑添加范围显示](/sample-deployrange)
   * [添加容器](/sample-addcontainer)
   * [鼠标跟随](/sample-followmouse)
+  * [死亡复活事件监听](/sample-playerdeathreborn)

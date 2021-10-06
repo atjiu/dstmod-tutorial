@@ -49,3 +49,4 @@
   * [添加容器](/sample-addcontainer)
   * [鼠标跟随](/sample-followmouse)
   * [死亡复活事件监听](/sample-playerdeathreborn)
+  * [武器AOE伤害](/sample-aoe)

@@ -116,7 +116,7 @@ local function ModFollowMouse(self)
 		local scale = Vector3(g_s.x/l_s.x, g_s.y/l_s.y, g_s.z/l_s.z)	--父级的全局缩放值
 
 		local ui_local_pos = ui:GetPosition()		--ui的相对位置（也就是SetPosition的时候传递的坐标）
-		ui_local_pos = Vector3(ui_local_pos.x * g_s.x, ui_local_pos.y * g_s.y, ui_local_pos.z * g_s.z)
+		ui_local_pos = Vector3(ui_local_pos.x * scale.x, ui_local_pos.y * scale.y, ui_local_pos.z * scale.z)
 		local ui_world_pos = ui:GetWorldPosition()
 		--如果修改过ui的屏幕原点，就重新计算ui的屏幕坐标（基于左下角为原点的）
 		if not (not ui.v_anchor or ui.v_anchor == ANCHOR_BOTTOM) or not (not ui.h_anchor or ui.h_anchor == ANCHOR_LEFT) then
@@ -165,9 +165,9 @@ self.drag_button.OnMouseButton = function(_self, button, down, x, y)	--注意:�
 end
 ```
 
-------
+-----
 
-## 详细说明(2021/11/23)
+## 详细说明(2021/11/23) 补充
 
 如果直接使用官方的`FollowMouse()`函数可能会遇到出乎意料的问题。在实际情况中，我们一般会将widget作为另一个widget的子级（child），当我们未对子级widget单独设置其坐标原点时，其坐标原点就是父级widget的坐标位置。即，当我们给子级widget设置坐标`SetPosition()`时，设置的是它相对于父级widget坐标的坐标——即相对位置。而如果我们使用`SetVAnchor(ANCHOR_BOTTOM)`、`SetHAnchor(ANCHOR_LEFT)`单独给子级widget设置了屏幕原点，那么子级widget就不会再以父级的坐标为坐标原点，但同时子级也不会再跟随父级的移动而移动，如果你需要整体移动某个UI，那么单独设置子级widget的原点会让你移动起来非常麻烦。
 

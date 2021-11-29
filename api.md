@@ -103,6 +103,7 @@ end
 -- 将动作添加到动作表
 AddAction(KAN)
 ```
+
 id为字符串，eg.
 ```lua
 AddAction('KAN_ID','砍',function(act)

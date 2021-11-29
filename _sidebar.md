@@ -38,6 +38,8 @@
   * [贴图大小](image-size)
   * [标签](tags)
   * [动画](animstate)
+  * [如何查找源码以及物品代码](findcode)
+  * [hook](hook)
 
 - 案例
 

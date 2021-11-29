@@ -6,7 +6,7 @@
   * [尝试使用api](/tryapi)
   * [mod配置项](/modconfig)
   * [tex与png互转](/textool)
-
+  * [如何查找源码以及物品代码](findcode)
 - 进阶
 
   * [饥荒源码目录结构](/folder-struct)
@@ -38,7 +38,6 @@
   * [贴图大小](image-size)
   * [标签](tags)
   * [动画](animstate)
-  * [如何查找源码以及物品代码](findcode)
   * [hook](hook)
 
 - 案例

@@ -33,7 +33,7 @@
 
 - 技巧
 
-  * [节点](room)
+  * [节点(地图)](room)
   * [debug](debug)
   * [贴图大小](image-size)
   * [标签](tags)
@@ -55,3 +55,4 @@
   * [料理BUFF](/sample-foodbuff)
   * [小房子](/sample-smallhouse)
   * [粒子/特效](/sample-particle)
+  * [制造虫洞](/sample-wormhole)

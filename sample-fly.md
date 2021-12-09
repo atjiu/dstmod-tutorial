@@ -16,10 +16,7 @@
 
 先看效果
 
-<video width="800" height="450" controls>
-    <source src="video/1639035116937.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+![](images/1639035116937.gif)
 
 ## 实现
 

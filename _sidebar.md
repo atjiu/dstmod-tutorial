@@ -57,3 +57,4 @@
   * [粒子/特效](/sample-particle)
   * [制造虫洞](/sample-wormhole)
   * [飞行能力](/sample-fly)
+  * [判断是否开启模组](/sample-ismodenable)

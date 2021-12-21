@@ -39,7 +39,6 @@
   * [标签](tags)
   * [动画](animstate)
   * [hook](hook)
-  * [class](class_func)
 
 - 案例
 

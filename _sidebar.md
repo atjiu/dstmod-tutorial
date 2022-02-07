@@ -39,7 +39,7 @@
   * [标签](tags)
   * [动画](animstate)
   * [hook](hook)
-  * [定义Class](define-class))
+  * [定义Class](define-class)
 
 - 案例
 

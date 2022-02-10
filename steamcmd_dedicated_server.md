@@ -136,3 +136,8 @@ screen -r dst-master
 ### 饥荒游戏本体更新了怎么办？
 
 重新运行一下 `./steamcmd.sh` ，匿名登录，再次运行 `app_update 343050 validate` 即可
+
+## 模组更新了怎么办？
+
+进入 screen 创建的终端里 `screen -r dst-master` 停掉服务，再次启动，就会自动更新mod并启动服务
+

@@ -97,6 +97,14 @@ $ ./dontstarve_dedicated_server_nullrenderer_x64 -console -cluster Cluster_1 -sh
 
 模组配置在 `Master/modoverrides.lua` 和 `Caves/modoverrides.lua` 里，它俩可以互相覆盖，只配置一个就行
 
+## 常用管理服务器命名
+
+管理员在游戏里打开控制台（按 ESC下面那个键）
+
+- 保存游戏 `c_save()`
+- 回档 `c_rollback(1)` 括号里就是回档几天，不填就是1天
+- 世界重置 `c_reset()`
+
 ## 常见问题
 
 ### 为什么我mod没有生效?
@@ -137,7 +145,7 @@ screen -r dst-master
 
 重新运行一下 `./steamcmd.sh` ，匿名登录，再次运行 `app_update 343050 validate` 即可
 
-## 模组更新了怎么办？
+### 模组更新了怎么办？
 
 进入 screen 创建的终端里 `screen -r dst-master` 停掉服务，再次启动，就会自动更新mod并启动服务
 

@@ -132,3 +132,7 @@ $ screen -S dst-master
 ```bash
 screen -r dst-master
 ```
+
+### 饥荒游戏本体更新了怎么办？
+
+重新运行一下 `./steamcmd.sh` ，匿名登录，再次运行 `app_update 343050 validate` 即可

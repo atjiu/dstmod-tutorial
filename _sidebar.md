@@ -7,6 +7,7 @@
   * [mod配置项](/modconfig)
   * [tex与png互转](/textool)
   * [如何查找源码以及物品代码](findcode)
+
 - 进阶
 
   * [饥荒源码目录结构](/folder-struct)
@@ -40,6 +41,7 @@
   * [动画](animstate)
   * [hook](hook)
   * [定义Class](define-class)
+  * [SteamCMD创建专服](steamcmd_dedicated_server)
 
 - 案例
 

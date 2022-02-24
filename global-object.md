@@ -3,6 +3,8 @@
 但有些对象就必须要用`GLOBAL`来调用，分别都有哪些呢？这里来罗列一下
 
 > 是否需要GLOBAL来调用的在 mods.lua 里有定义，在env里声明的都是可以直接用的，不需要加GLOBAL，其它就需要加上GLOBAL才能访问了，env声明部分代码如下
+> 
+> 如果不想使用GLOBAL来调用一些常量，也可以在modmain最上面写上这段代码 `GLOBAL.setmetatable(env, {__index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end})`
 
 ```lua
 local env =

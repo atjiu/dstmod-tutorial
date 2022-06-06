@@ -21,7 +21,7 @@ version = "0.1"
 forumthread = ""
 -- modicon 下一篇再介绍怎么创建的
 -- icon_atlas = "images/modicon.xml"
--- icon = "images/modicon.tex"
+-- icon = "modicon.tex"
 -- dst兼容
 dst_compatible = true
 -- 是否是客户端mod

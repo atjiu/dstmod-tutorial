@@ -39,6 +39,7 @@
   * [贴图大小](image-size)
   * [标签](tags)
   * [动画](animstate)
+  * [动画贴图帧](animimageframe)
   * [hook](hook)
   * [定义Class](define-class)
   * [SteamCMD创建专服](steamcmd_dedicated_server)

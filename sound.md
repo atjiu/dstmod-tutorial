@@ -1,3 +1,5 @@
+> 本篇参考了 `老王天天写bug` 的视频内容整理而出
+
 ## 准备
 
 饥荒里的音乐制作也有工具 名为 `fmod_designer`
@@ -37,9 +39,9 @@
 
 ![](images/20210731115604.png)
 
-最后设置一下banks(可选的，改不改都行)
+最后设置一下banks(可选的，改不改都行，不过压缩格式要改成MP3)
 
-![](images/20210731114059.png)
+![](images/20220918215943.png)
 
 最后按 Ctrl+B 或者点击Project->Build也可以对项目进行编译
 
@@ -182,3 +184,34 @@ end)
     <source src="video/1627701055547.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+
+
+------------------
+
+## 补充
+
+### 3D模式
+
+如果用到了比较长的音频，播放的过程中，要想实现音量近大远小的话，就需要将3d模式打开
+
+![](images/20220918220429.png)
+
+### 相关函数
+
+```lua
+local playSound = SoundEmitter.PlaySound
+local killSound = SoundEmitter.KillSound
+local killallsounds = SoundEmitter.KillAllSounds
+local setparameter = SoundEmitter.SetParameter
+local setvolume = SoundEmitter.SetVolume
+```
+
+声音控制函数的参数：见`scripts/debugsounds.lua`文件
+函数使用范例：见`components/dynamicmusic.lua`文件
+
+## 参考
+
+- [【饥荒mod教程】如何让游戏播放一段炫酷的音效？](https://www.bilibili.com/video/BV1Kt411k7YM)
+- [【饥荒mod教程】如何完美地把一段声音做成mod？](https://www.bilibili.com/video/BV11t411z73h)
+- [【饥荒mod教程】如何骚气地给游戏做音效](https://www.bilibili.com/video/BV1St41167Ep)
+

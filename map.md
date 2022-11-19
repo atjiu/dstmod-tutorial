@@ -277,7 +277,7 @@ return {
 
 ## 动态地形
 
-写动态地形之前首先要弄明白 room, task, taskset, level是啥，关于这点可以去 [节点](https://tomoya92.github.io/dstmod-tutorial/#/room) 里了解
+写动态地形之前首先要弄明白 room, task, taskset, level是啥，关于这点可以去 [节点](https://atjiu.github.io/dstmod-tutorial/#/room) 里了解
 
 它们之前的关系如下图
 

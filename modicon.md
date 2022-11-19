@@ -36,7 +36,7 @@ version = "0.32"
 -- 描述
 description = "Sample Mod version: " .. version
 -- 作者
-author = "tomoya92"
+author = "朋也"
 -- klei官方论坛地址，为空则默认是工坊的地址
 forumthread = ""
 -- modicon 下一篇再介绍怎么创建的

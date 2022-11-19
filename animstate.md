@@ -113,7 +113,7 @@
 
 动画`层`是在`anim.bin`里的，使用反编译工具将`anim.bin`转成`xml`文件，即可看到`layer`的名字
 
-点击下载 [反编译工具](https://tomoya92.github.io/dstmod-tutorial/attachment/反编译anim.binv0.2.zip)
+点击下载 [反编译工具](https://atjiu.github.io/dstmod-tutorial/attachment/反编译anim.binv0.2.zip)
 
 解压，配置环境变量
 

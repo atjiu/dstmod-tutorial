@@ -2,7 +2,7 @@
 
 #### 这里写一点关于常用hook的思路，个人觉得对于萌新灰常有用，分享一下。
 
-hook，英文翻译钩子，一般用于拦截原有逻辑，插入自己的修改。 科雷官方提供了灰常多的api(详见[Mod中常用的API](https://tomoya92.github.io/dstmod-tutorial/#/api))。
+hook，英文翻译钩子，一般用于拦截原有逻辑，插入自己的修改。 科雷官方提供了灰常多的api(详见[Mod中常用的API](https://atjiu.github.io/dstmod-tutorial/#/api))。
 我们可以利用这些来实现很多功能。
 
 例如`AddPrefabPostInit`，`AddComponentPostInit`，`AddXXXPostInit` 顾名思义，添加在XXX初始化之后执行。这就意味着我们可以拿到这个已经生成好的预制物进行处理。
@@ -14,11 +14,11 @@ hook，英文翻译钩子，一般用于拦截原有逻辑，插入自己的修�
 只要我们从攻击开始进行排查就肯定能找到，然后进行第二步。
 （当有很多相关联的因素时，就从一个确定的源头开始排查，如果查找不到，肯定是源头没找对，可以再上一级源头或者换个方向查找，熟悉后就很容易找到了。）
 
-2.找到青蛙攻击的代码。在源码中找到frog相关的代码（不会的同学看上一篇[如何查找源码以及物品代码](https://tomoya92.github.io/dstmod-tutorial/#/findcode)），
+2.找到青蛙攻击的代码。在源码中找到frog相关的代码（不会的同学看上一篇[如何查找源码以及物品代码](https://atjiu.github.io/dstmod-tutorial/#/findcode)），
 找到`frog.lua`文件后直接拉到最下面，如下图：
 ![](images/frog_1.png)
 
-通过[Prefab](https://tomoya92.github.io/dstmod-tutorial/#/prefab)篇我可以知道，最后一行中的fn是青蛙生成时调用的代码。攻击相关的设定应该也在这里，我们逐行排查。
+通过[Prefab](https://atjiu.github.io/dstmod-tutorial/#/prefab)篇我可以知道，最后一行中的fn是青蛙生成时调用的代码。攻击相关的设定应该也在这里，我们逐行排查。
 或者直接搜索攻击组件代码`combat`，之后我们会在`fn`方法中找到这样一段代码:
 
 ```lua

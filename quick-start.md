@@ -14,7 +14,7 @@ name = "Quick Start"
 -- 描述
 description = "Sample Mod"
 -- 作者
-author = "tomoya92"
+author = "朋也"
 -- 版本
 version = "0.1"
 -- klei官方论坛地址，为空则默认是工坊的地址

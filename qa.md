@@ -37,7 +37,7 @@ replica 翻译过来有复制的意思，顾名思义就是对原组件的一个
 
 简单的理解 inst 就代码的是 prefab，在创建一个prefab的时候，会调用 CreateEntity() 方法生成一个实例，这个实例对象的命名约定的都是inst
 
-它上面有哪些方法，哪些固有属性可以去 [prefab](https://tomoya92.github.io/dstmod-tutorial/#/prefab) 里查看
+它上面有哪些方法，哪些固有属性可以去 [prefab](https://atjiu.github.io/dstmod-tutorial/#/prefab) 里查看
 
 ## Combat:SetRange(attack, hit) hit是什么意思？
 

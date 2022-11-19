@@ -87,7 +87,7 @@ end)
 
 ![](images/20210731115742.png)
 
-下面来自定义一个地形，这部分教程在 [map](https://tomoya92.github.io/dstmod-tutorial/#/map) 篇里有讲，这里我就直接放代码了
+下面来自定义一个地形，这部分教程在 [map](https://atjiu.github.io/dstmod-tutorial/#/map) 篇里有讲，这里我就直接放代码了
 
 在mod文件夹里创建 `modworldgenmain.lua` 文件，添加下面代码
 ```lua

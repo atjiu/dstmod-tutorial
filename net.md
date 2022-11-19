@@ -1,6 +1,6 @@
 ## 前言
 
-在 Q&A 里已经介绍过 rpc 与 replica 的关系 [传送门](https://tomoya92.github.io/dstmod-tutorial/#/qa?id=%e4%bb%a5replica%e7%bb%93%e5%b0%be%e7%9a%84%e7%bb%84%e4%bb%b6%e4%b8%8erpc%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
+在 Q&A 里已经介绍过 rpc 与 replica 的关系 [传送门](https://atjiu.github.io/dstmod-tutorial/#/qa?id=%e4%bb%a5replica%e7%bb%93%e5%b0%be%e7%9a%84%e7%bb%84%e4%bb%b6%e4%b8%8erpc%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
 
 replica 翻译过来就是 `复制品` 的意思，顾名思义就是给客机获取数据用的，因为组件一般都是在主机处添加处理的，在客机里是拿不到组件上的数据的，除非有replica组件才能从它身上获取
 

@@ -1,6 +1,6 @@
 ## 打开TEX文件
 
-饥荒里的贴图都被转成了 `.tex` 后缀的文件，打开它需要使用 textool 工具，下载地址 [txtool1.4.2.zip](https://tomoya92.github.io/dstmod-tutorial/attachment/txtool1.4.2.zip)
+饥荒里的贴图都被转成了 `.tex` 后缀的文件，打开它需要使用 textool 工具，下载地址 [txtool1.4.2.zip](https://atjiu.github.io/dstmod-tutorial/attachment/txtool1.4.2.zip)
 
 解压，再打开 `.tex` 后缀的文件，就使用里面的 `TEXTool.exe` 打开即可（或者直接把tex文件拖动到`TEXTool.exe`上去也是可以打开的）
 

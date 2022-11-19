@@ -101,7 +101,7 @@ end)
 
 **定义组件时的Class()方法的三个参数分别指什么？**
 
-在 [高级-Class](https://tomoya92.github.io/dstmod-tutorial/#/class) 中有Class函数源码的介绍
+在 [高级-Class](https://atjiu.github.io/dstmod-tutorial/#/class) 中有Class函数源码的介绍
 
 **事件回调是怎么工作的？**
 

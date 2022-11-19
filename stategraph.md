@@ -152,7 +152,7 @@ ActionHandler = Class(function(self, action, state, condition) end)
 
 ## API
 
-对动作及sg进行修改的api有几个，在 [Mod中常用的API](https://tomoya92.github.io/dstmod-tutorial/#/api) 中有介绍
+对动作及sg进行修改的api有几个，在 [Mod中常用的API](https://atjiu.github.io/dstmod-tutorial/#/api) 中有介绍
 
 - AddAction(id, str, fn)
 - AddStategraphActionHandler(stategraph, handler)

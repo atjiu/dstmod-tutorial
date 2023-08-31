@@ -1,5 +1,7 @@
 ## 前言
 
+> **注意：除案例中的代码外所有教程页面里的代码都是代码片段，并不完整，不适用于复制粘贴！！！**
+>
 > ui与widget那篇用法是一样的，只不过，ui里用到了好多控件官方都给封装好了
 
 之前不会写mod时，看到木牌传送这种mod就特别好奇，那个弹窗是怎么弄出来的？还有弹窗里的滚动条是怎么出来的？弹窗里的按钮是怎么添加上的，都是自己画的么？
@@ -10,7 +12,7 @@
 
 这些控件的模板都在 `scripts/widgets/redux/templates.lua` 文件里
 
-下面就来写个带滚动条的弹窗，模组链接：https://steamcommunity.com/sharedfiles/filedetails/?id=2605922351
+下面就来写个带滚动条的弹窗，模组链接：https://steamcommunity.com/sharedfiles/filedetails/?id=2833182929
 
 ![](images/20210922103101.png)
 

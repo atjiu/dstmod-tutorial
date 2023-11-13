@@ -60,6 +60,24 @@ replica 翻译过来有复制的意思，顾名思义就是对原组件的一个
 
 有`inventoryitem`组件的实体是可以放进带有`inventory`或者`container`组件的实体里的
 
+## 物品栏中贴图不显示
+
+检查一下预制体的名字是否与贴图的名字一样，如果不一样，就需要指定贴图的名字
+
+注意，指定贴图的名字就只需要一个名字就行了
+
+比如预制体名字是 abc, 贴图名字是 bcd
+```lua
+inst:AddComponent("inventoryitem")
+inst.components.inventoryitem.atlasname = "images/bcd.xml"
+inst.components.inventoryitem.imagename = "bcd"
+```
+
+## 食谱中的模组物品不显示贴图
+
+使用`RegisterInventoryItemAtlas`api注册一下贴图即可
+
+如：`RegisterInventoryItemAtlas("images/inventoryimages/shyerry.xml", "shyerry.tex")`
 
 
 

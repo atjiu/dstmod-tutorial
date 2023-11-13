@@ -2,13 +2,23 @@
 
 ## AddCustomizeGroup(category, name, text, desc, atlas, order)
 
+猜测：添加自定义分组（用于创建世界时的对于游戏自定义处）
+
 ## RemoveCustomizeGroup(category, name)
+
+猜测：移除自定义分组（用于创建世界时的对于游戏自定义处）
 
 ## AddCustomizeItem(category, group, name, itemsettings)
 
+猜测：添加自定义项（与AddCustomizeGroup搭配使用，组里有项）
+
 ## RemoveCustomizeItem(category, name)
 
+猜测：移除自定义项（与AddCustomizeGroup搭配使用，组里有项）
+
 ## GetCustomizeDescription(description)
+
+猜测：获取自定义配置的描述
 
 ## AddLevelPreInit(levelid, fn)
 
@@ -34,9 +44,11 @@ fn参数是level的实例
 
 ## AddTaskSetPreInitAny(fn)
 
+对所有`地图任务`初始化的前置操作
+
 ## AddTaskPreInit(taskname, fn)
 
-在任务(taskname)执行之前先执行fn
+在`地图任务`(taskname)执行之前先执行fn
 
 fn参数为task对象
 
@@ -52,9 +64,15 @@ fn参数为task对象
 
 ## AddTaskSet(arg1, ...)
 
+地图api，添加`地图任务`集合
+
 ## AddTask(arg1, ...)
 
+地图api，添加地图任务
+
 ## AddRoom(arg1, ...)
+
+与task结合使用，room可理解为地图上的`奇遇`布置，task可理解为地形（草原，矿区，橡树林...）
 
 ## AddStartLocation(arg1, ...)
 
@@ -76,7 +94,24 @@ Sim: simulator 简写，模拟器的意思，在饥荒里可以理解为世界�
 
 ## AddGlobalClassPostConstruct(package, classname, fn)
 
+见 `AddClassPostConstruct` 的介绍
+
 ## AddClassPostConstruct(package, fn)
+
+万能api，对一个类进行hook，常见用于对 `components`, `widget` 等hook
+
+- package: 被hook的类的路径，要带上包名，如：`"components/health"` 即为对 `components/health.lua` 组件进行hook
+- fn：回调函数，fn第一个参数永远都是self，即被hook类的自身，后面参数见被hook类的定义处，如health.lua的构造方法是 `local Health = Class(function(self, inst)` 有两个参数，fn就有两个参数即：`fn(self, inst)`
+
+举例：
+
+比如要对`"components/health"`进行hook，写法如下
+
+```lua
+AddClassPostConstruct("components/health", function(self, inst)
+    -- 这里是你的逻辑
+end)
+```
 
 ## AddAction(id, str, fn)
 
@@ -108,7 +143,7 @@ id为字符串，eg.
 ```lua
 AddAction('KAN_ID','砍',function(act)
  -- 触发砍
-    return true 
+    return true
 end)
 ```
 
@@ -119,8 +154,8 @@ end)
 ```lua
 -- 定义一个动作选择器，eg.EQUIPPED装备有一个物品A，A有tool组件时触发fn
 AddComponentAction("EQUIPPED", "tool", function(inst, doer,target, actions, right)
-    -- function参数，inst这里是物品A,doer是动作执行者，这里是一般为玩家，target动作执行对象，actions，可触发的动作列表。right=true，是否是右键动作。 
-    if 
+    -- function参数，inst这里是物品A,doer是动作执行者，这里是一般为玩家，target动作执行对象，actions，可触发的动作列表。right=true，是否是右键动作。
+    if
     not right -- 不是右键
     doer.replica.combat ~= nil -- 有攻击组件
     and not (doer.replica.rider ~= nil and doer.replica.rider:IsRiding()) -- 动作执行者不在骑乘状态
@@ -138,6 +173,8 @@ end)
 ```
 
 ## AddPopup(id)
+
+添加一个弹窗的ui，游戏内详见耕作帽右键打开的作物详情界面，模组里可参照勋章的皮肤弹窗写法
 
 ## AddMinimapAtlas(atlaspath)
 
@@ -195,7 +232,11 @@ end),
 
 ## AddModShadersInit(fn)
 
+猜测：初始化mod中的着色器，这个太高端，如果想学，可参见`老王天天写bug`的这个模组 [Sakana & Chinanago](https://steamcommunity.com/sharedfiles/filedetails/?id=2860956005) 的源码，里面有着色器相关的代码
+
 ## AddModShadersSortAndEnable(fn)
+
+猜测：对mod着色器排序和启用，详见`AddModShadersInit`的介绍
 
 ## AddStategraphPostInit(stategraph, fn)
 
@@ -312,7 +353,7 @@ fn参数就是brain的实例
 
 ```lua
 --增加人物代码为renwu的角色到mod人物列表的里面 性别为女性（MALE（男）, FEMALE（女）, ROBOT（机器人）, NEUTRAL（中性）, PLURAL（双性））
-AddModCharacter("renwu", "MALE") 
+AddModCharacter("renwu", "MALE")
 ```
 
 ## RemoveDefaultCharacter(name)
@@ -380,7 +421,13 @@ STRINGS.TABS["zhuanshu_tab"] = "工具栏" -- 专属栏名字,鼠标悬浮在科
 
 ## RemapSoundEvent(name, new_name)
 
+人物模组中会用到的api，比如给自己的人物模组添加专属音效，就需要用到这个api来初始化音效，用法参见模组[Whispy, the Agricultured](https://steamcommunity.com/sharedfiles/filedetails/?id=2978133982)
+
 ## AddReplicableComponent(name)
+
+初始化复制组件的api，比如你的模组中自定义了一个口渴的组件 `thirsty.lua`，要想将数据同步到客机，就需要用到复制组件，关于复制组件详见：[net&replica](https://atjiu.github.io/dstmod-tutorial/#/net?id=replica%e7%bb%84%e4%bb%b6)
+
+当使用这个api注册了 `thirsty` 组件后，就相当于告诉饥荒，`thirsty`组件有一个复制组件用于同步信息，否则使用 `inst.replica.thirsty`获取客机的`thirsty`组件对象将会是空的
 
 ## AddModRPCHandler(namespace, name, fn)
 
@@ -414,23 +461,31 @@ RPC(Remote Procedure Call) 三个单词首字母缩写，意思是：远程过�
 
 ## SendModRPCToServer(id_table, ...)
 
+客机调用给主机发消息用的，其中的`id_table`格式是 `MOD_RPC[namespace][name]`，也可写成 `GetModRPC(namespace, name)`
+
 ## SendModRPCToClient(id_table, ...)
+
+给客机发消息的rpc（用的不多）
 
 ## SendModRPCToShard(id_table, ...)
 
+多层世界中用于给其它世界发消息的rpc（用的不多）
+
 ## GetModRPC(namespace, name)
 
-获取mod里定义的rpc
+获取mod里定义的rpc，看名字可知这个api是获取`AddModRPCHandler`api里定义的rpc
 
 ## GetClientModRPC(namespace, name)
 
-获取mod里定义的rpc
+获取mod里定义的rpc，看名字可知这个api是获取`AddClientModRPCHandler`api里定义的rpc
 
 ## GetShardModRPC(namespace, name)
 
-获取mod里定义的rpc
+获取mod里定义的rpc，看名字可知这个api是获取`AddShardModRPCHandler`api里定义的rpc
 
 ## SetModHUDFocus(focusid, hasfocus)
+
+猜测：设置模组中界面UI焦点的方法
 
 ## AddUserCommand(command_name, data)
 
@@ -442,9 +497,11 @@ RPC(Remote Procedure Call) 三个单词首字母缩写，意思是：远程过�
 
 ## ExcludeClothingSymbolForModCharacter(name, symbol)
 
+猜测：直译出来是 `排除Mod人物的服装特征`
+
 ## RegisterInventoryItemAtlas(atlas, prefabname)
 
-
+注册背包内物品贴图的api，当然在食谱等一些UI上显示的贴图都是用这个api注册的贴图，常见的打开食谱不显示模组食物贴图的问题就是因为没用这个api注册一下贴图导致的
 
 
 

@@ -195,7 +195,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIDAN = "Chinese Food"
 modmain.lua
 ```lua
 -- 默认加载中文简体，也可以通过mod菜单获取选择的语言来加载其它语言，换个名字即可
-require "languages/chs"
+modimport("languages/chs")
 ```
 
 ## 测试

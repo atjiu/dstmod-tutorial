@@ -7,6 +7,7 @@
   * [mod配置项](/modconfig)
   * [tex与png互转](/textool)
   * [如何查找源码以及物品代码](findcode)
+  * [解压动画](unpack)
 
 - 进阶
 

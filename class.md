@@ -18,6 +18,30 @@ class是面向对象的重要一环，在饥荒关于其的实现中，表是其
 
 饥荒关于类的实现，文件位于`scripts/class.lua`中
 
+## 通过 `__call` 来实现实例化
+
+借助元表的`__call`元函数，就可以像别的编程语言那样，直接用`表名`+`()`来实现实例化
+
+`__call`函数的第一个参数，就是 `表名()` 里所使用的表(table)
+
+```lua
+local data = {}    -- 这是一个 table
+print(data)        -- table: 0x0100ce2410
+-- data()          -- 报错: attempt to call local 'data' (a table value)
+
+local metaTable = {}    -- 元表也是一个 table
+metaTable.__call = function (self, ...)
+    print(self, ...)
+    return {}          -- 返回新的 table, 当作新的 `实例`
+end
+setmetatable(data, metaTable)
+
+-- 像这样执行的话 __call 会被调用，data这个表会被当成第一个参数传进去
+data(1, "a")            -- 输出: table: 0x0100ce2410     1       a
+```
+
+饥荒里的`Class`函数会生成一个新的table，我们把它当成新的类。然后再调用`__call`来生成这个类的实例 (lua里面这些东西的本体都是table)
+
 ## Class函数的调用实例
 
 因为类有继承和非继承两种构造，Class函数也有两种调用形态

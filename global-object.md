@@ -40,7 +40,7 @@ local env =
 
 被 `global()` 包装的对象经过查找在 `main.lua` 里，分别有以下这些
 
-> 这些对象在饥荒源码里找不到在哪定义的，所以下面罗列的属性及方法都是全局搜索出来的
+> 这些对象部分在饥荒源码里找不到在哪定义的，所以下面罗列的属性及方法都是全局搜索出来的
 
 **以下列出的属性和方法使用 属性：GLOBAL.TheCamera.distance 来调用，方法 GLOBAL.TheCamera:GetDownVec()**
 
@@ -263,7 +263,7 @@ local env =
 ## TheWorld
 
 游戏世界对象
-
+相关代码在world.lua中, TheWorld是这个文件所返回的类的一个对象
 这个对象应该是写mod最常用的了，至少 `TheWorld.ismastersim` 这个属性非常常见
 
 **属性**
@@ -466,9 +466,46 @@ local env =
 - GetProgression()
 - GetLastSeenProgression()
 
+## ShardGameIndex
+
+游戏存档分片索引对象
+这个在联机版中可以正常使用
+相关代码在shardindex.lua中, ShardGameIndex是ShardIndex类实例化出的一个对象
+每个分片就是一个世界存档, 运行的时候每个分片都是单独跑一个线程的, 典型的就是地上的世界分片和地下的洞穴世界分片.
+
+**属性**
+
+- ismaster 是否是主世界, 游戏中硬编码为这个shard的名字是否是"Master"
+- slot 用于回档的存档槽信息
+- shard 分片的名字, 例如"Master", "Caves"
+- version 这个分片游戏索引的版本, 当前为5
+- world 分片世界的数据
+- server 服务器数据
+- session_id 这个存档分片的(会话?)id, 例如一个存档保存为Cluster_1, 则"Cluster_1\Master\save\session\717F3FA062511DE5\" 这个路径中文件夹717F3FA062511DE5文件夹的名字就是它Master分片的session_id
+- enabled_mods 一个表, 保存了当前启用的模组信息
+
+**方法**
+
+- GetSlot() 直接返回slot属性
+- Delete() 
+- SaveCurrent()
+- Load()
+- GetGenOptions()
+- WriteTimeFile()
+- GetSaveDataFile()
+- GetSaveData()
+- OnGenerateNewWorld()
+- GetGameMode()
+- CheckWorldFile()
+- NewShardInSlot()
+- SetServerShardData()
+- IsEmpty() session_id是否是空的
+
 ## SaveGameIndex
 
-保存游戏时要用到的对象，主要操作的是一个存档回档那个标签里的5个插槽（栏位）的数据
+保存游戏时要用到的对象, 主要操作的是一个存档回档那个标签里的5个插槽（栏位）的数据
+经测试，这个在当前的联机版中似乎无法使用, 可能是单机版才使用, 或者是旧代码遗留, 联机版中直接使用获取不到数据
+相关代码在saveindex.lua中, SaveGameIndex是SaveIndex类实例化出的一个对象
 
 **属性**
 
@@ -508,34 +545,10 @@ local env =
 - GetSlotPresetText()
 - GetNextNewSlot() 获取下一个新的插槽
 
-## ShardGameIndex
-
-游戏索引对象
-
-**属性**
-
-没找到相关的属性
-
-**方法**
-
-- GetSlot()
-- Delete()
-- SaveCurrent()
-- Load()
-- GetGenOptions()
-- WriteTimeFile()
-- GetSaveDataFile()
-- GetSaveData()
-- OnGenerateNewWorld()
-- GetGameMode()
-- CheckWorldFile()
-- NewShardInSlot()
-- SetServerShardData()
-- IsEmpty()
-
 ## ShardSaveGameIndex
 
-与上面 SaveGameIndex 基本上一样
+与上面 SaveGameIndex 基本上一样，在联机版中同样拿不到数据
+相关代码在shardsaveindex.lua中, ShardSaveGameIdnex是ShardSaveIndex类实例化出的一个对象
 
 **属性**
 
@@ -595,7 +608,8 @@ local env =
 
 ## TheNet
 
-网络对象
+网络对象, 部分相关代码在networking.lua中, 猜测是部分lua端的代码通过TheNet对象调用底层C++代码, 底层C++代码有经过一些处理, 又回头调用这个文件的lua代码
+不止这一个对象有这个处理方式, 所以一些全局对象不一定是完全黑盒的
 
 **属性**
 
@@ -724,7 +738,7 @@ local env =
 - SetPlayerMuted() 设置玩家静音
 - TruncateSnapshotsInClusterSlot()
 - ListSnapshotsInClusterSlot()
-- ListSnapshots()
+- ListSnapshots(session_id, online_mode, ?) 列出指定存档的快照(用于回档的那个快照), 第一个参数是指定存档的session_id, 第二个是该存档是否是在线模式, 第三个参数用途未知, 官方使用的时候直接填了个10
 - GetLocalUserName() 获取本地用户名
 - GetServerEvent() 获取服务端事件
 - IsVoiceActive() 是否开启声音
